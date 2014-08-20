@@ -1,0 +1,51 @@
+{
+  "name": "ng-static",
+  "description": "Elegant way to store your app static content",
+  "version": "0.0.0",
+  "filename": "ng-static.min.js",
+  "main": "dist/ng-static.min.js",
+  "homepage": "https://github.com/a8m/ng-static",
+  "author": "Ariel Mashraki <ariel@mashraki.co.il>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/a8m/ng-static.git"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "keywords": [
+    "angular",
+    "client",
+    "browser",
+    "filter",
+    "static",
+    "content",
+    "translation"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.1",
+    "grunt-cli": ">= 0.1.7",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-bower": "*",
+    "grunt-bower-task": "*",
+    "grunt-karma": "latest",
+    "grunt-conventional-changelog": "0.0.12",
+    "grunt-zip": "*",
+    "karma-chrome-launcher": "~0.1.2",
+    "karma-firefox-launcher": "~0.1.3",
+    "karma": "~0.12.16",
+    "karma-jasmine": "~0.1.5",
+    "karma-phantomjs-launcher": "~0.1.4",
+    "coveralls": "~2.11.1",
+    "grunt-karma-coveralls": "~2.5.1",
+    "karma-coverage": "~0.2.4",
+    "grunt-coveralls": "~0.3.0"
+  },
+  "scripts": {
+    "test": "grunt test --verbose"
+  },
+  "license": "MIT"
+}
