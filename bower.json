@@ -1,0 +1,29 @@
+{
+  "name": "ng-static",
+  "version": "0.0.0",
+  "main": "dist/ng-static.js",
+  "description": "Elegant way to store your app static content",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/a8m/ng-static.git"
+  },
+  "dependencies": {
+    "angular": "*"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.16"
+  },
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "package.json",
+    "lib",
+    "test",
+    "src",
+    "Gruntfile.js",
+    ".gitignore",
+    "README.md",
+    "travis.yml",
+    ".bowercc"
+  ]
+}
