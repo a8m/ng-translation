@@ -1,0 +1,11 @@
+node_modules
+.tmp
+.sass-cache
+bower_components
+app
+.idea*
+.jshintrc
+.editorconfig
+.gitattributes
+.coveralls.yml
+test/coverage
