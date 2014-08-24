@@ -169,14 +169,22 @@ function ngStaticProvider() {
         }));
       });
 
-      $q.all(promises)
+      return $q.all(promises);
+    }
+
+    /**
+     * @description
+     * init function
+     */
+    function $$init() {
+      return $$loadAllFiles()
         .then($$bindFiles);
     }
 
     return {
       get: $$getFile,
       getAll: $$getFiles,
-      loadAll: $$loadAllFiles
+      init: $$init
     }
 
   }]
