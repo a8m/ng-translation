@@ -7,7 +7,7 @@
  * ngStatic description
  */
 
-angular.module('ng.static.provider', [])
+angular.module('ng.static.provider', [ 'ng.static.files-loader' ])
   .provider('ngStatic', ngStaticProvider);
 
 /**
@@ -110,7 +110,14 @@ function ngStaticProvider() {
    * @description
    * returned api
    */
-  this.$get = ['$http', '$q', function($http, $q) {
+  this.$get = ['$q', 'staticFilesLoader', function($q, staticFilesLoader) {
+
+    /**
+     * @description
+     * Store all static files content
+     * @var object
+     */
+    var staticFilesContainer;
 
     /**
      * @ngdoc method
@@ -132,9 +139,44 @@ function ngStaticProvider() {
       return staticFiles;
     }
 
+
+    /**
+     * @description
+     * bind files array to staticFilesContainer object
+     * @param filesArray
+     */
+    function $$bindFiles(filesArray) {
+      forEach(filesArray, function(value, key) {
+        staticFilesContainer[key] = value;
+      });
+    }
+
+    /**
+     * @ngdoc method
+     * @description
+     * load all files and then call bindFiles function
+     */
+    function $$loadAllFiles() {
+
+      var promises = [];
+
+      forEach(staticFiles, function(value, key) {
+        promises.push(staticFilesLoader.get({
+          baseUrl: baseUrl,
+          suffix: suffix,
+          value: value,
+          key: key
+        }));
+      });
+
+      $q.all(promises)
+        .then($$bindFiles);
+    }
+
     return {
       get: $$getFile,
-      getAll: $$getFiles
+      getAll: $$getFiles,
+      loadAll: $$loadAllFiles
     }
 
   }]
