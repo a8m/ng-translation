@@ -106,9 +106,52 @@ function ngStaticProvider() {
     return this;
   };
 
+  /**
+   * @description
+   * returned api
+   */
+  this.$get = ['$http', '$q', function($http, $q) {
 
+    /**
+     * @ngdoc method
+     * @param name
+     * @returns file || all files
+     * @private
+     */
+    function $$getFile(name) {
+      return staticFiles[name] || $$getFiles();
+    }
 
+    /**
+     * @ngdoc method
+     * @description
+     * returns all files / staticFiles object
+     * @returns staticFiles
+     */
+    function $$getFiles() {
+      return staticFiles;
+    }
 
+    return {
+      get: $$getFile,
+      getAll: $$getFiles
+    }
 
+  }]
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
