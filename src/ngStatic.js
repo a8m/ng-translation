@@ -10,7 +10,7 @@
  * ngStatic description
  */
 
-angular.module('ng.static', ['ng.static.provider', 'ng.static.filter'])
+angular.module('ng.static', [ 'ng.static.filter', 'ng.static.provider' ])
   .run(['ngStatic', function(ngStatic) {
     ngStatic.init();
-  }]);
+  }])
