@@ -84,7 +84,7 @@ function ngStaticProvider() {
    * @ngdoc method
    * @description
    * Set base url static file
-   * @param newBaseUrl
+   * @param url {String}
    * @returns {ngStaticProvider}
    * @example
    *  __ __ __ __ __ __
@@ -99,10 +99,10 @@ function ngStaticProvider() {
    *    homepage: 'homepage' <== dist/assets/static/homepage.json
    *  })
    */
-  this.setBaseUrl = function(newBaseUrl) {
-    baseUrl = new RegExp(/\/$/).text(url) ?
-      newBaseUrl.substring(0, newBaseUrl.length-1) :
-      newBaseUrl;
+  this.setBaseUrl = function(url) {
+    baseUrl = new RegExp(/\/$/).test(url) ?
+     url.substring(0, url.length-1) :
+      url;
     return this;
   };
 
@@ -138,7 +138,6 @@ function ngStaticProvider() {
     function $$getFiles() {
       return staticFiles;
     }
-
 
     /**
      * @description
