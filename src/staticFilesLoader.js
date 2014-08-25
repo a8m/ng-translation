@@ -15,6 +15,19 @@ function staticFilesLoaderFactory($http, $q) {
 
   /**
    * @ngdoc method
+   * @param data
+   * @param key
+   * @returns object
+   * @private
+   */
+  function $$extendRes(data, key) {
+    var object = {};
+    object[key] = data;
+    return object;
+  }
+
+  /**
+   * @ngdoc method
    * @param options [baseUrl, key, value, suffix]
    * @returns {Q.promise}
    */
@@ -31,8 +44,11 @@ function staticFilesLoaderFactory($http, $q) {
       method: 'GET',
       params: ''
     }).success(function (data) {
-      deferred.resolve(data);
+      //if everything work well return new object
+      //contains { name: staticResponse }
+      deferred.resolve($$extendRes(data, options.key));
     }).error(function (data) {
+      //else return
       deferred.reject(options.key);
     });
 

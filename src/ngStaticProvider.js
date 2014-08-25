@@ -117,7 +117,7 @@ function ngStaticProvider() {
      * Store all static files content
      * @var object
      */
-    var staticFilesContainer;
+    var staticFilesContainer = {};
 
     /**
      * @ngdoc method
@@ -126,7 +126,7 @@ function ngStaticProvider() {
      * @private
      */
     function $$getFile(name) {
-      return staticFiles[name] || $$getFiles();
+      return staticFilesContainer[name] || $$getFiles();
     }
 
     /**
@@ -147,7 +147,7 @@ function ngStaticProvider() {
      */
     function $$bindFiles(filesArray) {
       forEach(filesArray, function(value, key) {
-        staticFilesContainer[key] = value;
+        extend(staticFilesContainer, value);
       });
     }
 
