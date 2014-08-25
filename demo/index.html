@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title>ng-static demo</title>
+</head>
+<body ng-controller="MainController">
+
+    <div>
+        {{ foo }}
+        {{ 'foo' | static: 'demo' }}
+    </div>
+
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../src/common.js"></script>
+    <script src="../src/ngStatic.js"></script>
+    <script src="../src/ngStaticProvider.js"></script>
+    <script src="../src/staticFilesLoader.js"></script>
+    <script src="../src/ngStaticFilter.js"></script>
+    <script src="demo.js"></script>
+</body>
+</html>
