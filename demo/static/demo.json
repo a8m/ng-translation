@@ -1,6 +1,9 @@
 {
 
-  "foo": "bar",
-  "bar": "foo"
-
+  "foo": "bar-foo",
+  "bar": "foo",
+  "button": {
+    "manager": "manager button",
+    "employee": "employee button"
+  }
 }

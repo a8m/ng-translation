@@ -10,6 +10,11 @@
         {{ 'foo' | static: 'demo' }}
     </div>
 
+    <div>
+        <p> {{ 'button.'+role  | static: 'demo' }} </p>
+    </div>
+    <button ng-click="changeRole(role)">Change Role</button>
+
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../src/common.js"></script>
     <script src="../src/ngStatic.js"></script>
