@@ -107,6 +107,11 @@ function ngStaticProvider() {
   };
 
   /**
+   * Alias to setBaseUrl function
+   */
+  this.setDirectory = this.setBaseUrl;
+
+  /**
    * @description
    * returned api
    */
@@ -163,7 +168,8 @@ function ngStaticProvider() {
         promises.push(staticFilesLoader.get({
           baseUrl: baseUrl,
           suffix: suffix,
-          value: value,
+          value: (startWith(value, '/') || endsWith(baseUrl, '/')) ?
+          value : '/' + value,
           key: key
         }));
       });
