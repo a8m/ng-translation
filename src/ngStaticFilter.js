@@ -15,7 +15,7 @@ angular.module('ng.static.filter', [ 'ng.static.provider' ])
 
     return function(string, staticFile) {
 
-      return $parse(string)(ngStatic.get(staticFile));
+      return $parse(string)(ngStatic.get(staticFile)) || string;
 
     }
 
