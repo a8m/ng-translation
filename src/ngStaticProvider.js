@@ -58,7 +58,9 @@ function ngStaticProvider() {
    *  })
    */
   this.addStaticFile = function(file) {
-    extend(staticFiles, file);
+    staticFiles = (staticFiles) ?
+      extend(staticFiles, file) :
+      file;
     return this;
   };
 
@@ -125,6 +127,17 @@ function ngStaticProvider() {
     var staticFilesContainer = {};
 
     /**
+     * @description
+     * Store all configuration service
+     * @var object
+     */
+    var configuration = {
+      baseUrl: baseUrl || '',
+      suffix: suffix,
+      staticFiles: staticFiles
+    };
+
+    /**
      * @ngdoc method
      * @param name
      * @returns file || all files
@@ -166,9 +179,9 @@ function ngStaticProvider() {
 
       forEach(staticFiles, function(value, key) {
         promises.push(staticFilesLoader.get({
-          baseUrl: baseUrl,
+          baseUrl: configuration.baseUrl,
           suffix: suffix,
-          value: (startWith(value, '/') || endsWith(baseUrl, '/')) ?
+          value: (startWith(value, '/') || endsWith(configuration.baseUrl, '/')) ?
           value : '/' + value,
           key: key
         }));
@@ -187,6 +200,7 @@ function ngStaticProvider() {
     }
 
     return {
+      configuration: configuration,
       get: $$getFile,
       getAll: $$getFiles,
       init: $$init
