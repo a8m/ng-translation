@@ -2,7 +2,7 @@
 
 describe('ngStaticProvider', function() {
 
-  var httpResult;
+  var loaderResult;
 
   //Provider
   function staticFiles(files) {
@@ -38,7 +38,8 @@ describe('ngStaticProvider', function() {
 
         $timeout(function() {
           var object = {};
-          object[options.key] = httpResult[options.value];
+
+          object[options.key] = loaderResult[options.key];
 
           deferred.resolve(object);
         });
@@ -48,8 +49,8 @@ describe('ngStaticProvider', function() {
   }
 
   //Actions
-  function setHttpResult(result) {
-    return httpResult = result;
+  function setLoaderResult(result) {
+    return loaderResult = result;
   }
 
   beforeEach(module('ng.static.provider', function ($provide) {
@@ -57,7 +58,7 @@ describe('ngStaticProvider', function() {
     $provide.factory('staticFilesLoader', staticFilesLoaderMock);
   }));
 
-  describe('setters test', function() {
+  describe('test setters', function() {
 
     //staticFiles
     it('should be able to set staticFiles', function() {
@@ -97,6 +98,77 @@ describe('ngStaticProvider', function() {
       })
     });
 
-  })
+    //setFilesSuffix
+    it('should be able to set suffix for all files', function() {
+      module(setFilesSuffix('.json'));
+      inject(function(ngStatic) {
+        expect(ngStatic.configuration.suffix).toEqual('.json');
+      });
+    });
+
+  });
+
+  //api object
+  describe('api object', function() {
+
+    var mockResult;
+
+    beforeEach(function() {
+      //module
+      module(
+        staticFiles({ login: '/login', logout: 'logout' }),
+        setFilesSuffix('.json'),
+        setBaseUrl('/app/static')
+      );
+      //inject
+      inject(function(ngStatic, $timeout) {
+        mockResult = { login: { foo: 'bar' }, logout: { foo: 'baz' } };
+        setLoaderResult(mockResult);
+        ngStatic.init();
+
+        $timeout.flush();
+      });
+    });
+
+    it('should call staticFilesLoader', inject(function(ngStatic, staticFilesLoader) {
+      var spy = spyOn(staticFilesLoader, 'get');
+      ngStatic.init();
+
+      expect(spy)
+        .toHaveBeenCalledWith({ baseUrl : '/app/static', suffix : '.json', value : '/login', key : 'login' });
+      expect(spy)
+        .toHaveBeenCalledWith({ baseUrl : '/app/static', suffix : '.json', value : '/logout', key : 'logout' });
+    }));
+
+    it('should return the file if exist', inject(function(ngStatic) {
+      expect(ngStatic.get('login')).toEqual(mockResult.login);
+      expect(ngStatic.get('login')).not.toEqual(mockResult.logout);
+      expect(ngStatic.get('logout')).toEqual(mockResult.logout);
+      expect(ngStatic.get('logout')).not.toEqual(mockResult.login);
+    }));
+
+    it('should return allFiles is the file not exist', inject(function(ngStatic) {
+      expect(ngStatic.get('homepage')).toEqual(mockResult);
+      expect(ngStatic.get('api')).toEqual(mockResult);
+    }));
+
+    it('should return allFiles', inject(function(ngStatic) {
+      expect(ngStatic.getAll()).toEqual(mockResult);
+    }));
+  });
+
+  //external behavior
+  describe('external behavior', function() {
+
+    it('should be friendly with files path', function() {
+      module(staticFiles({ homepage: 'homepage.json' }));
+      inject(function(ngStatic, staticFilesLoader) {
+        var spy = spyOn(staticFilesLoader, 'get');
+        ngStatic.init();
+        expect(spy).toHaveBeenCalledWith({ baseUrl: '', value: '/homepage.json', key: 'homepage', suffix: undefined });
+      });
+    });
+
+  });
 
 });
