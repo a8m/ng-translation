@@ -154,7 +154,7 @@ function ngStaticProvider() {
      * @returns staticFiles
      */
     function $$getFiles() {
-      return staticFiles;
+      return staticFilesContainer;
     }
 
     /**
