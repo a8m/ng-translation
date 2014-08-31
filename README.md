@@ -72,12 +72,35 @@ angular.module('app', ['ng.static'])
       })
   }]);
 ```
+**JSON files:**
+```json
+//demo1 file
+{
+  "foo": "bar",
+  "message": {
+    "manager": "Hello Manager",
+    "employee": "Hello Employee"
+  },
+  "slides": [
+    "slide1: Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "slide2: Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "slide3: Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+  ]
+}
+```
 **HTML:**
 ```html
  <div>
    <!--  key , and file name as an argument -->
-   {{ 'key' | static: 'demo1' }}
+   {{ 'foo' | static: 'demo1' }}
 </div>
+
+<div ng-repeat="slider in 'slides' | static: 'demo1' track by $index">
+  {{ slider }}
+</div>
+<!-- chnage content dynamically -->
+<p>Initial Message:</p>
+<h2>{{ 'message.' + role | static: 'demo1' }}</h2>
 ```
 
 #Development
