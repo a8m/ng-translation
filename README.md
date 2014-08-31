@@ -57,7 +57,7 @@ App direcrtory:
 ```
 **JS:**
 ```js
-//create demo app and add ng.s
+//create demo app and add ng.static
 angular.module('app', ['ng.static'])
   .config(['ngStaticProvider', function(ngStaticProvider) {
     ngStaticProvider
