@@ -48,11 +48,12 @@ When you're done, your setup should look similar to the following:
 #Example
 App direcrtory:
 ```js
-/** __ __ __ __ __ __
+/*  __ __ __ __ __ __
  * | - dist          |
  * |   - assets      |
  * |     - static    |
  * |__ __ __ __ __ __|
+ */
 ```
 **JS:**
 ```js
@@ -71,6 +72,7 @@ angular.module('app', ['ng.static'])
       })
   }]);
 ```
+**HTML:**
 ```html
  <div>
    <!--  key , and file name as an argument -->
