@@ -72,9 +72,8 @@ angular.module('app', ['ng.static'])
       })
   }]);
 ```
-**JSON files:**
+**JSON files:**(demo1.json)
 ```json
-/* demo1 file */
 {
   "foo": "bar",
   "message": {
