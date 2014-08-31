@@ -49,5 +49,21 @@ describe('staticFileLoader', function() {
     expect(typeof promise.then).toBe('function');
   }));
 
+  it('should return the error message', inject(function($httpBackend, staticFilesLoader) {
+    var response;
+    $httpBackend.when('GET', '/foo.json').respond(function() {
+      return [500, {}, ""];
+    });
+    //get call
+    staticFilesLoader.get({ value: '/foo.json' })
+      .then(function () {
+        response = 'Success'
+    }, function() {
+      response = 'Error';
+    });
+    $httpBackend.flush();
+    expect(response).toEqual('Error');
+  }));
+
 
 });
