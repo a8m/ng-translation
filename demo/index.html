@@ -15,6 +15,10 @@
     </div>
     <button ng-click="changeRole(role)">Change Role</button>
 
+    <div ng-repeat="slider in 'slides' | static: 'demo' track by $index">
+        {{ slider }}
+    </div>
+
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../src/common.js"></script>
     <script src="../src/ngStatic.js"></script>
