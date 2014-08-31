@@ -74,7 +74,7 @@ angular.module('app', ['ng.static'])
 ```
 **JSON files:**
 ```json
-//demo1 file
+/* demo1 file */
 {
   "foo": "bar",
   "message": {
