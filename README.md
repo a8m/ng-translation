@@ -3,8 +3,18 @@
 
 ##Table of contents:
 - [Get Started](#get-started)
-- [Development](#development)
 - [Documentation](documentation)
+  - [Configuring ngStatic](#configuring-ngstatic)
+    - [setBaseUrl]()
+    - [seDirectory]()
+    - [setFilesSuffix]()
+    - [staticFiles]()
+    - [addStaticFile]()
+  - [configuration]()
+  - [get]()
+  - [getAll]()
+  - [init]()
+- [Development](#development)
 
 #Get Started
 **(1)** Get ng-static in one of 2 ways:
