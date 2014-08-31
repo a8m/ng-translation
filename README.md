@@ -14,6 +14,7 @@
   - [get]()
   - [getAll]()
   - [init]()
+- [Example](#example)
 - [Development](#development)
 
 #Get Started
@@ -43,6 +44,38 @@ When you're done, your setup should look similar to the following:
     ...
 </body>
 </html>
+```
+#Example
+App direcrtory:
+```js
+/** __ __ __ __ __ __
+ * | - dist          |
+ * |   - assets      |
+ * |     - static    |
+ * |__ __ __ __ __ __|
+```
+**JS:**
+```js
+//create demo app and add ng.s
+angular.module('app', ['ng.static'])
+  .config(['ngStaticProvider', function(ngStaticProvider) {
+    ngStaticProvider
+      //set files directory
+      .setDirectory('/assets/static')
+      //set files suffix
+      .setFilesSuffix('.json')
+      //add files as a key value pairs
+      .staticFiles({
+        demo1:  'demo',
+        demo2: 'demo'
+      })
+  }]);
+```
+```html
+ <div>
+   <!--  key , and file name as an argument -->
+   {{ 'key' | static: 'demo1' }}
+</div>
 ```
 
 #Development
