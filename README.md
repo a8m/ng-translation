@@ -6,7 +6,7 @@
 - [Documentation](documentation)
   - [Configuring ngStatic](#configuring-ngstatic)
     - [setBaseUrl]()
-    - [seDirectory]()
+    - [setDirectory]()
     - [setFilesSuffix]()
     - [staticFiles]()
     - [addStaticFile]()
