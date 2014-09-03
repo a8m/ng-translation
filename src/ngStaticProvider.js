@@ -151,7 +151,8 @@ function ngStaticProvider() {
      * @ngdoc method
      * @description
      * returns all files / staticFiles object
-     * @returns staticFiles
+     * @returns {{}}
+     * @private
      */
     function $$getFiles() {
       return staticFilesContainer;
