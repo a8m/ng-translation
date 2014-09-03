@@ -1,10 +1,12 @@
 {
-
-  "foo": "bar-foo",
-  "bar": "foo",
-  "button": {
+  "foo": "bar",
+  "message": {
     "manager": "manager button",
     "employee": "employee button"
   },
-  "slides": ["slide1", "slide2", "slide3"]
+  "slides": [
+    "slide1: Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "slide2: Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "slide3: Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+  ]
 }
