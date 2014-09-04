@@ -140,11 +140,12 @@ function ngStaticProvider() {
     /**
      * @ngdoc method
      * @param name
-     * @returns file || all files
+     * @returns specific file || the first(default) file
      * @private
      */
     function $$getFile(name) {
-      return staticFilesContainer[name] || $$getFiles();
+      return staticFilesContainer[name] ||
+        staticFilesContainer[Object.keys(staticFilesContainer)[0]];
     }
 
     /**
@@ -207,7 +208,7 @@ function ngStaticProvider() {
       init: $$init
     }
 
-  }]
+  }];
 
 }
 
