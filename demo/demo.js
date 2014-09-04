@@ -1,6 +1,5 @@
 angular.module('app', ['ng.static'])
   .controller('MainController', function($scope) {
-
     $scope.foo = 'bar';
     $scope.role = 'manager';
 

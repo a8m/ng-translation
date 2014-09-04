@@ -24,6 +24,7 @@ function ngStaticProvider() {
   //files suffix
   var suffix;
 
+  //base url / directory
   var baseUrl;
 
   /**
@@ -63,6 +64,7 @@ function ngStaticProvider() {
       file;
     return this;
   };
+
 
   /**
    * @ngdoc method
