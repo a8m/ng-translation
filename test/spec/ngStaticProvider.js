@@ -147,9 +147,9 @@ describe('ngStaticProvider', function() {
       expect(ngStatic.get('logout')).not.toEqual(mockResult.login);
     }));
 
-    it('should return allFiles is the file not exist', inject(function(ngStatic) {
-      expect(ngStatic.get('homepage')).toEqual(mockResult);
-      expect(ngStatic.get('api')).toEqual(mockResult);
+    it('should return first file/default is the file not exist', inject(function(ngStatic) {
+      expect(ngStatic.get('homepage')).toEqual(mockResult.login);
+      expect(ngStatic.get('api')).toEqual(mockResult.login);
     }));
 
     it('should return allFiles', inject(function(ngStatic) {
