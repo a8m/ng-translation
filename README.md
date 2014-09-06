@@ -1,5 +1,5 @@
 #ng-static
->A nice way to separate the coding from the static content
+>Separate the coding from the static content in a nice-ish way to
 
 ##Table of contents:
 - [Get Started](#get-started)
