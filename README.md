@@ -15,6 +15,7 @@
   - [getAll]()
   - [init]()
 - [Example](#example)
+- [TODO](#todo)
 - [Development](#development)
 
 #Get Started
@@ -101,6 +102,10 @@ angular.module('app', ['ng.static'])
 <p>Initial Message:</p>
 <h2>{{ 'message.' + role | static: 'demo1' }}</h2>
 ```
+#TODO
+Integrate with localStorage/sessionStorage
+Add examples
+Project page (branch: gh-pages)
 
 #Development
 Clone the project: <br/>
