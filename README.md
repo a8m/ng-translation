@@ -103,9 +103,10 @@ angular.module('app', ['ng.static'])
 <h2>{{ 'message.' + role | static: 'demo1' }}</h2>
 ```
 #TODO
-Integrate with localStorage/sessionStorage
-Add examples
-Project page (branch: gh-pages)
+- Integrate with localStorage/sessionStorage
+- Add examples
+- Project page (branch: gh-pages)
+- API improvement
 
 #Development
 Clone the project: <br/>
