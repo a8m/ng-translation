@@ -10,6 +10,10 @@ angular.module('app', ['ng.static'])
     };
 
   })
+  .value({
+    value1: { foo: 'bar' },
+    value2: { foo: 'baz' }
+  })
   .config(['ngStaticProvider', function(ngStaticProvider) {
     ngStaticProvider
       .setDirectory('/ng-static/demo/static')

@@ -6,12 +6,12 @@
 <body ng-controller="MainController">
 
     <div>
-        {{ foo }}
+        {{ foo }}<br/>
         {{ 'foo' | static: 'demo' }}
     </div>
 
     <div>
-        <p> {{ 'button.'+role  | static: 'demo' }} </p>
+        <p> {{ 'message.'+role  | static: 'demo' }} </p>
     </div>
     <button ng-click="changeRole(role)">Change Role</button>
 
