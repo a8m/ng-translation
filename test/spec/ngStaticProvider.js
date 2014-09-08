@@ -186,4 +186,23 @@ describe('ngStaticProvider', function() {
 
   });
 
+  describe('load static values api', function() {
+    var v1 = { foo: 'bar' }, v2 = { foo: 'baz' };
+
+    //mock services and set static values in the providers phase
+      beforeEach(module(function($provide) {
+        $provide.value('value1', v1);
+        $provide.value('value2', v2);
+      }, staticValues([ 'value1', 'value2' ]))
+    );
+
+    it('should all values as a files', inject(function(ngStatic) {
+      ngStatic.init();
+      expect(ngStatic.get('value1')).toEqual(v1);
+      expect(ngStatic.get('value2')).toEqual(v2);
+      expect(ngStatic.getAll()).toEqual({ value1: v1, value2: v2 });
+    }));
+
+  });
+
 });
