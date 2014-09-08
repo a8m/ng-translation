@@ -17,6 +17,12 @@ describe('ngStaticProvider', function() {
     }
   }
 
+  function staticValues(values) {
+    return function(ngStaticProvider) {
+      ngStaticProvider.staticValues(values);
+    }
+  }
+
   function setFilesSuffix(sfx) {
     return function(ngStaticProvider) {
       ngStaticProvider.setFilesSuffix(sfx)
@@ -75,6 +81,15 @@ describe('ngStaticProvider', function() {
       module(addStaticFile(file));
       inject(function(ngStatic) {
         expect(ngStatic.configuration.staticFiles).toEqual(file);
+      });
+    });
+
+    //staticValues
+    it('should be able to set staticValues', function() {
+      var values = ['demo1', 'demo2', 'demo3'];
+      module(staticValues(values));
+      inject(function(ngStatic) {
+        expect(ngStatic.configuration.staticValues).toEqual(values);
       });
     });
 
