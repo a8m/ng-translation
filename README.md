@@ -10,6 +10,7 @@
     - [setFilesSuffix]()
     - [staticFiles]()
     - [addStaticFile]()
+    - [staticValues]()
   - [configuration]()
   - [get]()
   - [getAll]()
