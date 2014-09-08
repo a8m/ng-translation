@@ -71,7 +71,7 @@ function ngStaticProvider() {
   /**
    * @ngdoc method
    * @description
-   * Set array of static values
+   * Set array of values as a files
    * @param values {Array}
    * @return {ngStaticProvider}
    * @example
@@ -139,7 +139,7 @@ function ngStaticProvider() {
    * @description
    * returned api
    */
-  this.$get = ['$q', 'staticFilesLoader', function($q, staticFilesLoader) {
+  this.$get = ['$q', '$injector', 'staticFilesLoader', function($q, $injector, staticFilesLoader) {
 
     /**
      * @description
@@ -217,10 +217,23 @@ function ngStaticProvider() {
 
     /**
      * @description
+     * bind all values to staticFilesContainer object as a files
+     * @return {Array}
+     */
+    function $$bindValues() {
+      return forEach(staticValues || [], function(value) {
+        var file = {};
+        file[value] = $injector.get(value);
+        extend(staticFilesContainer, file);
+      });
+    }
+
+    /**
+     * @description
      * init function
      */
     function $$init() {
-      return $$loadAllFiles()
+      return $$bindValues() && $$loadAllFiles()
         .then($$bindFiles);
     }
 
