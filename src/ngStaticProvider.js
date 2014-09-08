@@ -21,6 +21,9 @@ function ngStaticProvider() {
   //store all files
   var staticFiles;
 
+  //store all values
+  var staticValues;
+
   //files suffix
   var suffix;
 
@@ -65,6 +68,23 @@ function ngStaticProvider() {
     return this;
   };
 
+  /**
+   * @ngdoc method
+   * @description
+   * Set array of static values
+   * @param values {Array}
+   * @return {ngStaticProvider}
+   * @example
+   * ngStaticProvider
+   *  .staticValue([
+   *    'demo1',
+   *    'demo2'
+   *  ])
+   */
+  this.staticValues = function(values) {
+    staticValues = values;
+    return this;
+  };
 
   /**
    * @ngdoc method
@@ -136,7 +156,8 @@ function ngStaticProvider() {
     var configuration = {
       baseUrl: baseUrl || '',
       suffix: suffix,
-      staticFiles: staticFiles
+      staticFiles: staticFiles,
+      staticValues: staticValues
     };
 
     /**
