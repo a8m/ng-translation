@@ -1,4 +1,4 @@
-#ng-static &nbsp; [![Build Status](https://travis-ci.org/a8m/ng-static.svg?branch=master)](https://travis-ci.org/a8m/ng-static) [![Coverage Status](https://coveralls.io/repos/a8m/ng-static/badge.png?branch=master)](https://coveralls.io/r/a8m/ng-static?branch=master)
+#ng-static &nbsp; [![Coverage Status](https://coveralls.io/repos/a8m/ng-static/badge.png?branch=master)](https://coveralls.io/r/a8m/ng-static?branch=master)
 >Separate the coding from the static content in a nice-ish way to
 
 ##Table of contents:
