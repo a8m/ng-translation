@@ -1,4 +1,4 @@
-#ng-static
+#ng-static &nbsp; [![Build Status](https://travis-ci.org/a8m/ng-static.svg?branch=master)](https://travis-ci.org/a8m/ng-static)
 >Separate the coding from the static content in a nice-ish way to
 
 ##Table of contents:
