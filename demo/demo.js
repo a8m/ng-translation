@@ -22,4 +22,8 @@ angular.module('app', ['ng.static'])
         demo1: 'demo.json',
         demo2: 'demo.json'
       })
+      .staticValues([
+        'value1',
+        'value2'
+      ])
   }]);
