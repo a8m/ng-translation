@@ -61,16 +61,3 @@ function staticFilesLoaderFactory($http, $q) {
   }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

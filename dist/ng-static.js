@@ -1,3 +1,89 @@
+/**
+ * Elegant way to store your app static content
+ * @version v0.0.1 - 2014-09-13 * @link https://github.com/a8m/ng-static
+ * @author Ariel Mashraki <ariel@mashraki.co.il>
+ * @license MIT License, http://www.opensource.org/licenses/MIT
+ */
+(function ( window, angular, undefined ) {
+/*jshint globalstrict:true*/
+'use strict';
+
+var isDefined = angular.isDefined,
+  isUndefined = angular.isUndefined,
+  isFunction = angular.isFunction,
+  isString = angular.isString,
+  isNumber = angular.isNumber,
+  isObject = angular.isObject,
+  isArray = angular.isArray,
+  forEach = angular.forEach,
+  extend = angular.extend,
+  copy = angular.copy,
+  equals = angular.equals;
+
+/**
+ * @description
+ * returns if a string ends with a particular suffix
+ * @param str
+ * @param suffix
+ * @returns {boolean}
+ */
+function endsWith(str, suffix) {
+  return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}
+
+/**
+ * @description
+ * returns if a string starts with a particular prefix
+ * @param str
+ * @param prefix
+ * @returns {boolean}
+ */
+function startWith(str, prefix) {
+  return !str.indexOf(prefix);
+}
+
+/**
+ * @ngdoc module
+ * @name ng.static
+ *
+ * @requires ng.static.filter
+ * @requires ng.static.provider
+ *
+ * @description
+ * ngStatic description
+ */
+
+angular.module('ng.static', [
+    'ng.static.filter',
+    'ng.static.provider'
+  ])
+  .run(['ngStatic', function(ngStatic) {
+    ngStatic.init();
+  }]);
+
+
+/**
+ * @ngdoc module
+ * @name ng.static.filter
+ *
+ * @description
+ * ngStaticFilter get key as a string, and staticFileName as an arguments
+ * and return the value.
+ * @example
+ * <p>{{ 'someKey' | ng-static: 'homepage' }}</p>
+ */
+
+angular.module('ng.static.filter', [ 'ng.static.provider' ])
+  .filter('static', ['$parse', 'ngStatic', function($parse, ngStatic) {
+
+    return function(string, staticFile) {
+
+      return $parse(string)(ngStatic.get(staticFile)) || string;
+
+    }
+
+  }]);
+
 
 /**
  * @ngdoc module
@@ -20,9 +106,6 @@ function ngStaticProvider() {
 
   //store all files
   var staticFiles;
-
-  //store all values
-  var staticValues;
 
   //files suffix
   var suffix;
@@ -68,23 +151,6 @@ function ngStaticProvider() {
     return this;
   };
 
-  /**
-   * @ngdoc method
-   * @description
-   * Set array of values as a files
-   * @param values {Array}
-   * @return {ngStaticProvider}
-   * @example
-   * ngStaticProvider
-   *  .staticValue([
-   *    'demo1',
-   *    'demo2'
-   *  ])
-   */
-  this.staticValues = function(values) {
-    staticValues = values;
-    return this;
-  };
 
   /**
    * @ngdoc method
@@ -139,7 +205,7 @@ function ngStaticProvider() {
    * @description
    * returned api
    */
-  this.$get = ['$q', '$injector', 'staticFilesLoader', function($q, $injector, staticFilesLoader) {
+  this.$get = ['$q', 'staticFilesLoader', function($q, staticFilesLoader) {
 
     /**
      * @description
@@ -156,8 +222,7 @@ function ngStaticProvider() {
     var configuration = {
       baseUrl: baseUrl || '',
       suffix: suffix,
-      staticFiles: staticFiles,
-      staticValues: staticValues
+      staticFiles: staticFiles
     };
 
     /**
@@ -217,23 +282,10 @@ function ngStaticProvider() {
 
     /**
      * @description
-     * bind all values to staticFilesContainer object as a files
-     * @return {Array}
-     */
-    function $$bindValues() {
-      return forEach(staticValues || [], function(value) {
-        var file = {};
-        file[value] = $injector.get(value);
-        extend(staticFilesContainer, file);
-      });
-    }
-
-    /**
-     * @description
      * init function
      */
     function $$init() {
-      return $$bindValues() && $$loadAllFiles()
+      return $$loadAllFiles()
         .then($$bindFiles);
     }
 
@@ -247,3 +299,68 @@ function ngStaticProvider() {
   }];
 
 }
+
+
+/**
+ * @ngdoc module
+ * @name ng.static.files-loader
+ *
+ * @description
+ * handle load static files phase
+ */
+
+angular.module('ng.static.files-loader', [])
+  .factory('staticFilesLoader', ['$http', '$q', staticFilesLoaderFactory]);
+
+
+function staticFilesLoaderFactory($http, $q) {
+
+  /**
+   * @ngdoc method
+   * @param data
+   * @param key
+   * @returns object
+   * @private
+   */
+  function $$extendRes(data, key) {
+    var object = {};
+    object[key] = data;
+    return object;
+  }
+
+  /**
+   * @ngdoc method
+   * @param options [baseUrl, key, value, suffix]
+   * @returns {Q.promise}
+   */
+  function $$get(options) {
+
+    var deferred = $q.defer();
+
+    $http({
+      url: [
+        options.baseUrl,
+        options.value,
+        options.suffix
+      ].join(''),
+      method: 'GET',
+      params: ''
+    }).success(function (data) {
+      //if everything work well return new object
+      //contains { name: staticResponse }
+      deferred.resolve($$extendRes(data, options.key));
+    }).error(function (data) {
+      //else return
+      deferred.reject(options.key);
+    });
+
+    return deferred.promise;
+
+  }
+
+  return {
+    get: $$get
+  }
+
+}
+})( window, window.angular );
