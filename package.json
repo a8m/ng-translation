@@ -1,7 +1,7 @@
 {
   "name": "ng-static",
   "description": "Elegant way to store your app static content",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "filename": "ng-static.min.js",
   "main": "dist/ng-static.min.js",
   "homepage": "https://github.com/a8m/ng-static",

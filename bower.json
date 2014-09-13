@@ -1,6 +1,6 @@
 {
   "name": "ng-static",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "dist/ng-static.js",
   "description": "Elegant way to store your app static content",
   "repository": {
