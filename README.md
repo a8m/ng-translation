@@ -50,11 +50,13 @@ When you're done, your setup should look similar to the following:
 #Example
 App direcrtory:
 ```js
-/*  __ __ __ __ __ __
- * | - dist          |
- * |   - assets      |
- * |     - static    |
- * |__ __ __ __ __ __|
+/*  __ __ __ __ __ __ __
+ * | - dist             |
+ * |   - assets         |
+ * |     - static       |
+ * |      * demo1.json  |
+ * |      * demo2.json  |
+ * |__ __ __ __ __ __ __|
  */
 ```
 **JS:**
@@ -74,8 +76,8 @@ angular.module('app', ['ng.static'])
       .setFilesSuffix('.json')
       //add files as a key value pairs
       .staticFiles({
-        demo1:  'demo',
-        demo2: 'demo'
+        demo1: 'demo1',
+        demo2: 'demo2'
       })
       .staticValues([
         'value1',
