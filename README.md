@@ -61,6 +61,11 @@ App direcrtory:
 ```js
 //create demo app and add ng.static
 angular.module('app', ['ng.static'])
+  //usage: [name]: [object]
+  .value({
+    value1: { key: 'value' },
+    value2: { key: 'value' }
+  })
   .config(['ngStaticProvider', function(ngStaticProvider) {
     ngStaticProvider
       //set files directory
@@ -72,6 +77,10 @@ angular.module('app', ['ng.static'])
         demo1:  'demo',
         demo2: 'demo'
       })
+      .staticValues([
+        'value1',
+        'value2'
+      ])
   }]);
 ```
 **JSON files:**(demo1.json)
@@ -92,7 +101,7 @@ angular.module('app', ['ng.static'])
 **HTML:**
 ```html
  <div>
-   <!--  key , and file name as an argument -->
+   <!--  key , and file name as an argument (if there is only one file use: {{ 'key' | static }} )-->
    {{ 'foo' | static: 'demo1' }}
 </div>
 
