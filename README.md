@@ -110,7 +110,7 @@ angular.module('app', ['ng.static'])
 <div ng-repeat="slider in 'slides' | static: 'demo1' track by $index">
   {{ slider }}
 </div>
-<!-- chnage content dynamically -->
+<!-- change content dynamically -->
 <p>Initial Message:</p>
 <h2>{{ 'message.' + role | static: 'demo1' }}</h2>
 ```
