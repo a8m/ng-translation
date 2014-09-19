@@ -12,7 +12,8 @@
 
 angular.module('ng.static', [
     'ng.static.filter',
-    'ng.static.provider'
+    'ng.static.provider',
+    'ng.static.directive'
   ])
   .run(['ngStatic', function(ngStatic) {
     ngStatic.init();

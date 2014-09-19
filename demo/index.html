@@ -25,12 +25,17 @@
         {{ 'foo' | static }}
     </div>
 
+    <div>
+        <p ng-static="demo(foo)"></p>
+    </div>
+
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../src/common.js"></script>
     <script src="../src/ngStatic.js"></script>
     <script src="../src/ngStaticProvider.js"></script>
     <script src="../src/staticFilesLoader.js"></script>
     <script src="../src/ngStaticFilter.js"></script>
+    <script src="../src/ngStaticDirective.js"></script>
     <script src="demo.js"></script>
 </body>
 </html>
