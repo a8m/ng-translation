@@ -6,7 +6,7 @@
  * @description
  * ngStaticDirective
  * @example
- * <p ng-static="file(key)"></p>
+ * <p ng-static="file(key)"></p> || <p ng-static="key"></p>
  */
 
 angular.module('ng.static.directive', [ 'ng.static.provider' ])
@@ -20,7 +20,12 @@ function ngStaticDirective($parse) {
       var args = tAttr[this.name]
         .match(/^([^(]+?)\s*(\((.*)\))?$/);
 
-      tElm.text('{{ ' + args[3] + ' | static:' + args[1] + ' }}');
+      //set the file name if exist
+      var params = /[)]$/.test(tAttr[this.name])
+        ? { file: ': ' + args[1], key: args[3] }
+        : { file: '', key: args[1] };
+
+      tElm.text('{{ ' + params.key + ' | static' + params.file +' }}');
 
       //linkFn
       return function(scope, elm, attr){}
