@@ -113,6 +113,9 @@ angular.module('app', ['ng.static'])
 <!-- change content dynamically -->
 <p>Initial Message:</p>
 <h2>{{ 'message.' + role | static: 'demo1' }}</h2>
+
+<!-- use ng-static directive, similar to ng-bind-->
+<p ng-static="file(key)"></p>
 ```
 #TODO
 - Integrate with localStorage/sessionStorage
