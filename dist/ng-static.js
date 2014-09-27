@@ -1,6 +1,6 @@
 /**
- * Elegant way to store your app static content
- * @version v0.0.1 - 2014-09-13 * @link https://github.com/a8m/ng-static
+ * Separate the coding from the static content in a nice-ish way
+ * @version v0.0.2 - 2014-09-27 * @link https://github.com/a8m/ng-static
  * @author Ariel Mashraki <ariel@mashraki.co.il>
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
@@ -55,11 +55,48 @@ function startWith(str, prefix) {
 
 angular.module('ng.static', [
     'ng.static.filter',
-    'ng.static.provider'
+    'ng.static.provider',
+    'ng.static.directive'
   ])
   .run(['ngStatic', function(ngStatic) {
     ngStatic.init();
   }]);
+
+
+/**
+ * @ngdoc module
+ * @name ng.static.directive
+ *
+ * @description
+ * ngStaticDirective
+ * @example
+ * <p ng-static="file(key)"></p> || <p ng-static="key"></p>
+ */
+
+angular.module('ng.static.directive', [ 'ng.static.provider' ])
+  .directive('ngStatic', ['$parse', ngStaticDirective]);
+
+function ngStaticDirective($parse) {
+  return {
+    restrict: 'A',
+    compile: function(tElm, tAttr, transclude) {
+
+      var args = tAttr[this.name]
+        .match(/^([^(]+?)\s*(\((.*)\))?$/);
+
+      //set the file name if exist
+      var params = /[)]$/.test(tAttr[this.name])
+        ? { file: ': ' + args[1], key: args[3] }
+        : { file: '', key: args[1] };
+
+      tElm.text('{{ ' + params.key + ' | static' + params.file +' }}');
+
+      //linkFn
+      return function(scope, elm, attr){}
+
+    }
+  };
+}
 
 
 /**
@@ -107,6 +144,9 @@ function ngStaticProvider() {
   //store all files
   var staticFiles;
 
+  //store all values
+  var staticValues;
+
   //files suffix
   var suffix;
 
@@ -151,6 +191,23 @@ function ngStaticProvider() {
     return this;
   };
 
+  /**
+   * @ngdoc method
+   * @description
+   * Set array of values as a files
+   * @param values {Array}
+   * @return {ngStaticProvider}
+   * @example
+   * ngStaticProvider
+   *  .staticValue([
+   *    'demo1',
+   *    'demo2'
+   *  ])
+   */
+  this.staticValues = function(values) {
+    staticValues = values;
+    return this;
+  };
 
   /**
    * @ngdoc method
@@ -205,7 +262,7 @@ function ngStaticProvider() {
    * @description
    * returned api
    */
-  this.$get = ['$q', 'staticFilesLoader', function($q, staticFilesLoader) {
+  this.$get = ['$q', '$injector', 'staticFilesLoader', function($q, $injector, staticFilesLoader) {
 
     /**
      * @description
@@ -222,7 +279,8 @@ function ngStaticProvider() {
     var configuration = {
       baseUrl: baseUrl || '',
       suffix: suffix,
-      staticFiles: staticFiles
+      staticFiles: staticFiles,
+      staticValues: staticValues
     };
 
     /**
@@ -282,10 +340,23 @@ function ngStaticProvider() {
 
     /**
      * @description
+     * bind all values to staticFilesContainer object as a files
+     * @return {Array}
+     */
+    function $$bindValues() {
+      return forEach(staticValues || [], function(value) {
+        var file = {};
+        file[value] = $injector.get(value);
+        extend(staticFilesContainer, file);
+      });
+    }
+
+    /**
+     * @description
      * init function
      */
     function $$init() {
-      return $$loadAllFiles()
+      return $$bindValues() && $$loadAllFiles()
         .then($$bindFiles);
     }
 
