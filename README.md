@@ -2,7 +2,9 @@
 >Separate the coding from the static content in a nice-ish way
 
 ##Table of contents:
+- [Description](#description)
 - [Get Started](#get-started)
+- [Example](#example)
 - [Documentation](documentation)
   - [Configuring ngStatic](#configuring-ngstatic)
     - [setBaseUrl]()
@@ -15,9 +17,15 @@
   - [get]()
   - [getAll]()
   - [init]()
-- [Example](#example)
 - [TODO](#todo)
 - [Development](#development)
+
+#Description
+ngStatic allows you to:</br>
+- Store all you content in one place
+- Sets app's content dynamic based on user-role/localization/app-state etc... (No more ng-show/ng-hide)
+- Allowing content writers to not deal with code
+- And more..
 
 #Get Started
 **(1)** Get ng-static in one of 2 ways:
@@ -118,10 +126,10 @@ angular.module('app', ['ng.static'])
 <p ng-static="file(key)"></p>
 ```
 #TODO
-- Integrate with localStorage/sessionStorage
 - Add examples
-- Project page (branch: gh-pages)
 - API improvement
+- Integrate with localStorage/sessionStorage
+- Project page (branch: gh-pages)
 
 #Development
 Clone the project: <br/>
