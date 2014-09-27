@@ -1,5 +1,5 @@
 #ng-static &nbsp; [![Coverage Status](https://coveralls.io/repos/a8m/ng-static/badge.png?branch=master)](https://coveralls.io/r/a8m/ng-static?branch=master)
->Separate the coding from the static content in a nice-ish way
+>Separate the coding from the static content in a nice-ish way, **v0.0.2**
 
 ##Table of contents:
 - [Description](#description)
