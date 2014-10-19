@@ -1,6 +1,6 @@
 {
   "name": "ng-translation",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "main": "dist/ng-translation.js",
   "description": "Fast, Easy and Dynamic translation for AngularJS",
   "repository": {
