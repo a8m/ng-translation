@@ -13,9 +13,9 @@
 angular.module('ng-translation.filter', [ 'ng-translation.provider' ])
   .filter('translate', ['$parse', 'ngTranslation', function($parse, ngTranslation) {
 
-    return function(string, staticFile) {
+    return function(string, value) {
 
-      return $parse(string)(ngTranslation.get(staticFile)) || string;
+      return $parse(string)(ngTranslation.getUsed()) || string;
 
     }
 

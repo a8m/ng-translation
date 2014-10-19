@@ -180,7 +180,8 @@ function ngTranslationProvider() {
       suffix: suffix,
       langsFiles: langsFiles,
       langsValues: langsValues,
-      fallbackLanguage: fallbackLanguage
+      fallbackLanguage: fallbackLanguage,
+      usedLanguage: usedLanguage
     };
 
     /**
@@ -193,6 +194,17 @@ function ngTranslationProvider() {
       return isString(name)
         ? usedLanguage = name
         : false;
+    }
+
+    /**
+     * @ngdoc method
+     * @description
+     * Return the current used file || fallback file
+     * @returns {*}
+     */
+    function $$getUsed() {
+      return staticFilesContainer[usedLanguage] ||
+        staticFilesContainer[fallbackLanguage];
     }
 
     /**
@@ -276,6 +288,7 @@ function ngTranslationProvider() {
       configuration: configuration,
       get: $$getFile,
       getAll: $$getFiles,
+      getUsed: $$getUsed,
       init: $$init,
       use: $$setUsedLanguage
     }

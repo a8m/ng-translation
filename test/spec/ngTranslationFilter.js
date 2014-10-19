@@ -3,16 +3,16 @@
 describe('ngTranslationFilter', function() {
 
   //mock files
-  var mockFiles = {};
+  var mockFile = {};
   //helper
   function bindKeys(object) {
-   return extend(mockFiles, object);
+   return extend(mockFile, object);
   }
 
   beforeEach(module('ng-translation.filter', function($provide) {
     $provide.value('ngTranslation', {
-      get: function(key) {
-        return mockFiles[key] || mockFiles;
+      getUsed: function() {
+        return mockFile;
       }
     });
   }));
@@ -25,21 +25,22 @@ describe('ngTranslationFilter', function() {
     function(translateFilter) {
       //bind some keys to mock
       bindKeys({
-        login: { manager: 'hello manager', employee: 'hello employee' },
-        logout: { msg: { employee: 'c ya employee' } }
+        manager: 'hello manager',
+        employee: 'hello employee',
+        msg: { employee: 'c ya employee' }
       });
       //expectation
-      expect(translateFilter('manager', 'login')).toBe('hello manager');
-      expect(translateFilter('employee', 'login')).toBe('hello employee');
+      expect(translateFilter('manager')).toBe('hello manager');
+      expect(translateFilter('employee')).toBe('hello employee');
 
-      expect(translateFilter('msg.employee', 'logout')).toBe('c ya employee');
+      expect(translateFilter('msg.employee')).toBe('c ya employee');
     }
   ));
 
   it('should return the given key if the value is undefined', inject(
     function(translateFilter) {
-      expect(translateFilter('employer', 'file')).toBe('employer');
-      expect(translateFilter('employer.btn', 'file')).toBe('employer.btn');
+      expect(translateFilter('employer')).toBe('employer');
+      expect(translateFilter('employer.btn')).toBe('employer.btn');
     }
   ));
 
