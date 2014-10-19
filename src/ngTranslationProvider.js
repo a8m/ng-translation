@@ -45,9 +45,9 @@ function ngTranslationProvider() {
    * @example
    * ngTranslationProvider
    *  .langsFiles({
-   *    homepage: 'file.json',
-   *    login: 'folder/file.json',
-   *    search: 'file' <== by default prefix is json
+   *    en: 'file.json',
+   *    he: 'folder/file.json',
+   *    ru: 'file' <== by default prefix is json
    *  })
    */
   this.langsFiles = function(files) {
@@ -64,7 +64,7 @@ function ngTranslationProvider() {
    * @example
    * ngTranslationProvider
    *  .addLangFile({
-   *    name: filename.json
+   *   en: filename.json
    *  })
    */
   this.addLangFile = function(file) {
@@ -83,8 +83,8 @@ function ngTranslationProvider() {
    * @example
    * ngTranslationProvider
    *  .langsValue([
-   *    'demo1',
-   *    'demo2'
+   *    'en',
+   *    'ru'
    *  ])
    */
   this.langsValues = function(values) {
@@ -102,7 +102,7 @@ function ngTranslationProvider() {
    * ngTranslationProvider
    *  .setFilesSuffix('-static.json')
    *  .langsFiles({
-   *    homepage: 'homepage' <== homepage-static.json
+   *    en: 'en' <== en-static.json
    *  })
    */
   this.setFilesSuffix = function(sfx) {
@@ -126,7 +126,7 @@ function ngTranslationProvider() {
    * ngTranslationProvider
    *  .setBaseUrl('dist/assets/static')
    *  .langsFiles({
-   *    homepage: 'homepage' <== dist/assets/static/homepage.json
+   *    en: 'english,json' <== dist/assets/static/english.json
    *  })
    */
   this.setBaseUrl = function(url) {

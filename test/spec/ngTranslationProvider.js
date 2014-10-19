@@ -35,6 +35,12 @@ describe('ngTranslationProvider', function() {
     }
   }
 
+  function setFallbackLanguage(name) {
+    return function(ngTranslationProvider) {
+      ngTranslationProvider.fallbackLanguage(name);
+    }
+  }
+
   //Mocks
   function staticFilesLoaderMock($timeout, $q) {
     //mock the http request
@@ -121,6 +127,14 @@ describe('ngTranslationProvider', function() {
       });
     });
 
+    //fallbackLanguage
+    it('should be able to set fallback language', function() {
+      module(setFallbackLanguage('en'));
+      inject(function(ngTranslation) {
+        expect(ngTranslation.configuration.fallbackLanguage).toEqual('en');
+      });
+    });
+
   });
 
   //api object
@@ -131,13 +145,13 @@ describe('ngTranslationProvider', function() {
     beforeEach(function() {
       //module
       module(
-        langsFiles({ login: '/login', logout: 'logout' }),
+        langsFiles({ login: '/login', logout: 'logout', en: 'en' }),
         setFilesSuffix('.json'),
         setBaseUrl('/app/static')
       );
       //inject
       inject(function(ngTranslation, $timeout) {
-        mockResult = { login: { foo: 'bar' }, logout: { foo: 'baz' } };
+        mockResult = { login: { foo: 'bar' }, logout: { foo: 'baz' }, en: {} };
         setLoaderResult(mockResult);
         ngTranslation.init();
 
@@ -170,6 +184,13 @@ describe('ngTranslationProvider', function() {
     it('should return allFiles', inject(function(ngTranslation) {
       expect(ngTranslation.getAll()).toEqual(mockResult);
     }));
+
+    it('should return the used language if exist', inject(function(ngTranslation) {
+      expect(ngTranslation.getUsed()).toBeUndefined();
+      ngTranslation.use('en');
+      expect(ngTranslation.getUsed()).toEqual(mockResult.en)
+    }));
+
   });
 
   //external behavior
