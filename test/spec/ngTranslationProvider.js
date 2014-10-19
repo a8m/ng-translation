@@ -145,13 +145,14 @@ describe('ngTranslationProvider', function() {
     beforeEach(function() {
       //module
       module(
-        langsFiles({ login: '/login', logout: 'logout', en: 'en' }),
+        langsFiles({ login: '/login', logout: 'logout', en: 'en', de: 'de' }),
         setFilesSuffix('.json'),
-        setBaseUrl('/app/static')
+        setBaseUrl('/app/static'),
+        setFallbackLanguage('de')
       );
       //inject
       inject(function(ngTranslation, $timeout) {
-        mockResult = { login: { foo: 'bar' }, logout: { foo: 'baz' }, en: {} };
+        mockResult = { login: { foo: 'bar' }, logout: { foo: 'baz' }, en: {}, de: [] };
         setLoaderResult(mockResult);
         ngTranslation.init();
 
@@ -186,9 +187,13 @@ describe('ngTranslationProvider', function() {
     }));
 
     it('should return the used language if exist', inject(function(ngTranslation) {
-      expect(ngTranslation.getUsed()).toBeUndefined();
+      expect(ngTranslation.getUsed()).toEqual(mockResult.de)
       ngTranslation.use('en');
       expect(ngTranslation.getUsed()).toEqual(mockResult.en)
+    }));
+
+    it('should return the fallback language if used not defined', inject(function(ngTranslation) {
+        expect(ngTranslation.getUsed()).toEqual(mockResult.de)
     }));
 
   });
