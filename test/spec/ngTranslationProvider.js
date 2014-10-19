@@ -1,37 +1,37 @@
 'use strict';
 
-describe('ngStaticProvider', function() {
+describe('ngTranslationProvider', function() {
 
   var loaderResult;
 
   //Provider
   function staticFiles(files) {
-    return function(ngStaticProvider) {
-      ngStaticProvider.staticFiles(files);
+    return function(ngTranslationProvider) {
+      ngTranslationProvider.staticFiles(files);
     }
   }
 
   function addStaticFile(file) {
-    return function(ngStaticProvider) {
-      ngStaticProvider.addStaticFile(file);
+    return function(ngTranslationProvider) {
+      ngTranslationProvider.addStaticFile(file);
     }
   }
 
   function staticValues(values) {
-    return function(ngStaticProvider) {
-      ngStaticProvider.staticValues(values);
+    return function(ngTranslationProvider) {
+      ngTranslationProvider.staticValues(values);
     }
   }
 
   function setFilesSuffix(sfx) {
-    return function(ngStaticProvider) {
-      ngStaticProvider.setFilesSuffix(sfx)
+    return function(ngTranslationProvider) {
+      ngTranslationProvider.setFilesSuffix(sfx)
     }
   }
 
   function setBaseUrl(url) {
-    return function(ngStaticProvider) {
-      ngStaticProvider.setBaseUrl(url);
+    return function(ngTranslationProvider) {
+      ngTranslationProvider.setBaseUrl(url);
     }
   }
 
@@ -59,7 +59,7 @@ describe('ngStaticProvider', function() {
     return loaderResult = result;
   }
 
-  beforeEach(module('ng.static.provider', function ($provide) {
+  beforeEach(module('ng-translation.provider', function ($provide) {
     //Dependency as a mock
     $provide.factory('staticFilesLoader', staticFilesLoaderMock);
   }));
@@ -70,8 +70,8 @@ describe('ngStaticProvider', function() {
     it('should be able to set staticFiles', function() {
       var files = { login: '/login_page',  logout: '/logout_page' };
       module(staticFiles(files));
-      inject(function(ngStatic) {
-        expect(ngStatic.configuration.staticFiles).toEqual(files);
+      inject(function(ngTranslation) {
+        expect(ngTranslation.configuration.staticFiles).toEqual(files);
       });
     });
 
@@ -79,8 +79,8 @@ describe('ngStaticProvider', function() {
     it('should able to add static file', function() {
       var file = { foo: '/foo' };
       module(addStaticFile(file));
-      inject(function(ngStatic) {
-        expect(ngStatic.configuration.staticFiles).toEqual(file);
+      inject(function(ngTranslation) {
+        expect(ngTranslation.configuration.staticFiles).toEqual(file);
       });
     });
 
@@ -88,8 +88,8 @@ describe('ngStaticProvider', function() {
     it('should be able to set staticValues', function() {
       var values = ['demo1', 'demo2', 'demo3'];
       module(staticValues(values));
-      inject(function(ngStatic) {
-        expect(ngStatic.configuration.staticValues).toEqual(values);
+      inject(function(ngTranslation) {
+        expect(ngTranslation.configuration.staticValues).toEqual(values);
       });
     });
 
@@ -97,27 +97,27 @@ describe('ngStaticProvider', function() {
     it('should add able to set base url', function() {
       var url = 'app/static';
       module(setBaseUrl(url));
-      inject(function(ngStatic) {
-        expect(ngStatic.configuration.baseUrl).toEqual(url);
+      inject(function(ngTranslation) {
+        expect(ngTranslation.configuration.baseUrl).toEqual(url);
       });
     });
 
     //setDirectory
     it('should add able to use setDirectory to set baseUrl', function() {
-      module(function(ngStaticProvider) {
-        ngStaticProvider
+      module(function(ngTranslationProvider) {
+        ngTranslationProvider
           .setDirectory('/app/static');
       });
-      inject(function(ngStatic) {
-        expect(ngStatic.configuration.baseUrl).toEqual('/app/static');
+      inject(function(ngTranslation) {
+        expect(ngTranslation.configuration.baseUrl).toEqual('/app/static');
       })
     });
 
     //setFilesSuffix
     it('should be able to set suffix for all files', function() {
       module(setFilesSuffix('.json'));
-      inject(function(ngStatic) {
-        expect(ngStatic.configuration.suffix).toEqual('.json');
+      inject(function(ngTranslation) {
+        expect(ngTranslation.configuration.suffix).toEqual('.json');
       });
     });
 
@@ -136,18 +136,18 @@ describe('ngStaticProvider', function() {
         setBaseUrl('/app/static')
       );
       //inject
-      inject(function(ngStatic, $timeout) {
+      inject(function(ngTranslation, $timeout) {
         mockResult = { login: { foo: 'bar' }, logout: { foo: 'baz' } };
         setLoaderResult(mockResult);
-        ngStatic.init();
+        ngTranslation.init();
 
         $timeout.flush();
       });
     });
 
-    it('should call staticFilesLoader', inject(function(ngStatic, staticFilesLoader) {
+    it('should call staticFilesLoader', inject(function(ngTranslation, staticFilesLoader) {
       var spy = spyOn(staticFilesLoader, 'get');
-      ngStatic.init();
+      ngTranslation.init();
 
       expect(spy)
         .toHaveBeenCalledWith({ baseUrl : '/app/static', suffix : '.json', value : '/login', key : 'login' });
@@ -155,20 +155,20 @@ describe('ngStaticProvider', function() {
         .toHaveBeenCalledWith({ baseUrl : '/app/static', suffix : '.json', value : '/logout', key : 'logout' });
     }));
 
-    it('should return the file if exist', inject(function(ngStatic) {
-      expect(ngStatic.get('login')).toEqual(mockResult.login);
-      expect(ngStatic.get('login')).not.toEqual(mockResult.logout);
-      expect(ngStatic.get('logout')).toEqual(mockResult.logout);
-      expect(ngStatic.get('logout')).not.toEqual(mockResult.login);
+    it('should return the file if exist', inject(function(ngTranslation) {
+      expect(ngTranslation.get('login')).toEqual(mockResult.login);
+      expect(ngTranslation.get('login')).not.toEqual(mockResult.logout);
+      expect(ngTranslation.get('logout')).toEqual(mockResult.logout);
+      expect(ngTranslation.get('logout')).not.toEqual(mockResult.login);
     }));
 
-    it('should return first file/default is the file not exist', inject(function(ngStatic) {
-      expect(ngStatic.get('homepage')).toEqual(mockResult.login);
-      expect(ngStatic.get('api')).toEqual(mockResult.login);
+    it('should return first file/default is the file not exist', inject(function(ngTranslation) {
+      expect(ngTranslation.get('homepage')).toEqual(mockResult.login);
+      expect(ngTranslation.get('api')).toEqual(mockResult.login);
     }));
 
-    it('should return allFiles', inject(function(ngStatic) {
-      expect(ngStatic.getAll()).toEqual(mockResult);
+    it('should return allFiles', inject(function(ngTranslation) {
+      expect(ngTranslation.getAll()).toEqual(mockResult);
     }));
   });
 
@@ -177,9 +177,9 @@ describe('ngStaticProvider', function() {
 
     it('should be friendly with files path', function() {
       module(staticFiles({ homepage: 'homepage.json' }));
-      inject(function(ngStatic, staticFilesLoader) {
+      inject(function(ngTranslation, staticFilesLoader) {
         var spy = spyOn(staticFilesLoader, 'get');
-        ngStatic.init();
+        ngTranslation.init();
         expect(spy).toHaveBeenCalledWith({ baseUrl: '', value: '/homepage.json', key: 'homepage', suffix: undefined });
       });
     });
@@ -196,11 +196,11 @@ describe('ngStaticProvider', function() {
       }, staticValues([ 'value1', 'value2' ]))
     );
 
-    it('should all values as a files', inject(function(ngStatic) {
-      ngStatic.init();
-      expect(ngStatic.get('value1')).toEqual(v1);
-      expect(ngStatic.get('value2')).toEqual(v2);
-      expect(ngStatic.getAll()).toEqual({ value1: v1, value2: v2 });
+    it('should all values as a files', inject(function(ngTranslation) {
+      ngTranslation.init();
+      expect(ngTranslation.get('value1')).toEqual(v1);
+      expect(ngTranslation.get('value2')).toEqual(v2);
+      expect(ngTranslation.getAll()).toEqual({ value1: v1, value2: v2 });
     }));
 
   });

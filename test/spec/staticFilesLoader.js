@@ -1,6 +1,6 @@
 'use strict';
 
-describe('staticFileLoader', function() {
+describe('staticFilesLoader', function() {
 
   //whenGET
   function whenGET(path, res) {
@@ -22,7 +22,7 @@ describe('staticFileLoader', function() {
     }
   }
 
-  beforeEach(module('ng.static.files-loader'));
+  beforeEach(module('ng-translation.files-loader'));
 
   it('should be defined', inject(function(staticFilesLoader) {
     expect(staticFilesLoader).toBeDefined();

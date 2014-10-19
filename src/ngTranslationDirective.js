@@ -1,18 +1,18 @@
 
 /**
  * @ngdoc module
- * @name ng.static.directive
+ * @name ng-translation.directive
  *
  * @description
- * ngStaticDirective
+ * ngTranslationDirective
  * @example
- * <p ng-static="file(key)"></p> || <p ng-static="key"></p>
+ * <p ng-translate="file(key)"></p> || <p ng-translate="key"></p>
  */
 
-angular.module('ng.static.directive', [ 'ng.static.provider' ])
-  .directive('ngStatic', ['$parse', ngStaticDirective]);
+angular.module('ng-translation.directive', [ 'ng-translation.provider' ])
+  .directive('ngTranslate', ['$parse', ngTranslationDirective]);
 
-function ngStaticDirective($parse) {
+function ngTranslationDirective($parse) {
   return {
     restrict: 'A',
     compile: function(tElm, tAttr, transclude) {
@@ -25,7 +25,7 @@ function ngStaticDirective($parse) {
         ? { file: ': ' + args[1], key: args[3] }
         : { file: '', key: args[1] };
 
-      tElm.text('{{ ' + params.key + ' | static' + params.file +' }}');
+      tElm.text('{{ ' + params.key + ' | translate' + params.file +' }}');
 
       //linkFn
       return function(scope, elm, attr){}

@@ -1,13 +1,13 @@
 
 /**
  * @ngdoc module
- * @name ng.static.files-loader
+ * @name ng-translation.files-loader
  *
  * @description
  * handle load static files phase
  */
 
-angular.module('ng.static.files-loader', [])
+angular.module('ng-translation.files-loader', [])
   .factory('staticFilesLoader', ['$http', '$q', staticFilesLoaderFactory]);
 
 

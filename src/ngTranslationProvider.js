@@ -1,22 +1,22 @@
 
 /**
  * @ngdoc module
- * @name ng.static.provider
+ * @name ng-translation.provider
  *
  * @description
- * ngStatic description
+ * ngTranslation description
  */
 
-angular.module('ng.static.provider', [ 'ng.static.files-loader' ])
-  .provider('ngStatic', ngStaticProvider);
+angular.module('ng-translation.provider', [ 'ng-translation.files-loader' ])
+  .provider('ngTranslation', ngTranslationProvider);
 
 /**
  * @ngdoc function
- * @name ngStaticProvider
+ * @name ngTranslationProvider
  *
  * @description
  */
-function ngStaticProvider() {
+function ngTranslationProvider() {
 
   //store all files
   var staticFiles;
@@ -35,9 +35,9 @@ function ngStaticProvider() {
    * @description
    * Set static files as a key value pairs
    * @param files
-   * @return {ngStaticProvider}
+   * @return {ngTranslationProvider}
    * @example
-   * ngStaticProvider
+   * ngTranslationProvider
    *  .staticFiles({
    *    homepage: 'file.json',
    *    login: 'folder/file.json',
@@ -54,9 +54,9 @@ function ngStaticProvider() {
    * @description
    * Add file to static files object
    * @param file
-   * @returns {ngStaticProvider}
+   * @returns {ngTranslationProvider}
    * @example
-   * ngStaticProvider
+   * ngTranslationProvider
    *  .addStaticFile({
    *    name: filename.json
    *  })
@@ -73,9 +73,9 @@ function ngStaticProvider() {
    * @description
    * Set array of values as a files
    * @param values {Array}
-   * @return {ngStaticProvider}
+   * @return {ngTranslationProvider}
    * @example
-   * ngStaticProvider
+   * ngTranslationProvider
    *  .staticValue([
    *    'demo1',
    *    'demo2'
@@ -91,9 +91,9 @@ function ngStaticProvider() {
    * @description
    * Set global suffix to all files
    * @param sfx
-   * @returns {ngStaticProvider}
+   * @returns {ngTranslationProvider}
    * @example
-   * ngStaticProvider
+   * ngTranslationProvider
    *  .setFilesSuffix('-static.json')
    *  .setFiles({
    *    homepage: 'homepage' <== homepage-static.json
@@ -109,7 +109,7 @@ function ngStaticProvider() {
    * @description
    * Set base url static file
    * @param url {String}
-   * @returns {ngStaticProvider}
+   * @returns {ngTranslationProvider}
    * @example
    *  __ __ __ __ __ __
    * | - dist          |
@@ -117,7 +117,7 @@ function ngStaticProvider() {
    * |     - static    |
    * |__ __ __ __ __ __|
    *
-   * ngStaticProvider
+   * ngTranslationProvider
    *  .setBaseUrl('dist/assets/static')
    *  .staticFiles({
    *    homepage: 'homepage' <== dist/assets/static/homepage.json

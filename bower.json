@@ -1,11 +1,11 @@
 {
-  "name": "ng-static",
-  "version": "0.0.2",
-  "main": "dist/ng-static.js",
-  "description": "Elegant way to store your app static content",
+  "name": "ng-translation",
+  "version": "0.0.1",
+  "main": "dist/ng-translation.js",
+  "description": "Fast, Easy and Dynamic translation for AngularJS",
   "repository": {
     "type": "git",
-    "url": "https://github.com/a8m/ng-static.git"
+    "url": "https://github.com/a8m/ng-translation.git"
   },
   "dependencies": {
     "angular": "*"
