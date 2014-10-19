@@ -19,10 +19,10 @@ angular.module('ng-translation.provider', [ 'ng-translation.files-loader' ])
 function ngTranslationProvider() {
 
   //store all files
-  var staticFiles;
+  var langsFiles;
 
   //store all values
-  var staticValues;
+  var langsValues;
 
   //files suffix
   var suffix;
@@ -30,41 +30,47 @@ function ngTranslationProvider() {
   //base url / directory
   var baseUrl;
 
+  //fallback language
+  var fallbackLanguage;
+
+  //used language, file to use
+  var usedLanguage;
+
   /**
    * @ngdoc method
    * @description
-   * Set static files as a key value pairs
+   * Set languages files as a key value pairs
    * @param files
    * @return {ngTranslationProvider}
    * @example
    * ngTranslationProvider
-   *  .staticFiles({
+   *  .langsFiles({
    *    homepage: 'file.json',
    *    login: 'folder/file.json',
    *    search: 'file' <== by default prefix is json
    *  })
    */
-  this.staticFiles = function(files) {
-    staticFiles = files;
+  this.langsFiles = function(files) {
+    langsFiles = files;
     return this;
   };
 
   /**
    * @ngdoc method
    * @description
-   * Add file to static files object
+   * Add file to languages files object
    * @param file
    * @returns {ngTranslationProvider}
    * @example
    * ngTranslationProvider
-   *  .addStaticFile({
+   *  .addLangFile({
    *    name: filename.json
    *  })
    */
-  this.addStaticFile = function(file) {
-    staticFiles = (staticFiles) ?
-      extend(staticFiles, file) :
-      file;
+  this.addLangFile = function(file) {
+    langsFiles = langsFiles
+      ? extend(langsFiles, file)
+      : file;
     return this;
   };
 
@@ -76,13 +82,13 @@ function ngTranslationProvider() {
    * @return {ngTranslationProvider}
    * @example
    * ngTranslationProvider
-   *  .staticValue([
+   *  .langsValue([
    *    'demo1',
    *    'demo2'
    *  ])
    */
-  this.staticValues = function(values) {
-    staticValues = values;
+  this.langsValues = function(values) {
+    langsValues = values;
     return this;
   };
 
@@ -95,7 +101,7 @@ function ngTranslationProvider() {
    * @example
    * ngTranslationProvider
    *  .setFilesSuffix('-static.json')
-   *  .setFiles({
+   *  .langsFiles({
    *    homepage: 'homepage' <== homepage-static.json
    *  })
    */
@@ -107,7 +113,7 @@ function ngTranslationProvider() {
   /**
    * @ngdoc method
    * @description
-   * Set base url static file
+   * Set base url static files directory
    * @param url {String}
    * @returns {ngTranslationProvider}
    * @example
@@ -119,7 +125,7 @@ function ngTranslationProvider() {
    *
    * ngTranslationProvider
    *  .setBaseUrl('dist/assets/static')
-   *  .staticFiles({
+   *  .langsFiles({
    *    homepage: 'homepage' <== dist/assets/static/homepage.json
    *  })
    */
@@ -127,6 +133,22 @@ function ngTranslationProvider() {
     baseUrl = new RegExp(/\/$/).test(url) ?
      url.substring(0, url.length-1) :
       url;
+    return this;
+  };
+
+  /**
+   * @ngdoc method
+   * @description
+   * Set fallback language
+   * @param lang
+   * @returns {ngTranslationProvider}
+   * @example
+   * ngTranslationProvider
+   *  .fallbackLanguage('en')
+   *
+   */
+  this.fallbackLanguage = function(lang) {
+    fallbackLanguage = lang;
     return this;
   };
 
@@ -156,9 +178,22 @@ function ngTranslationProvider() {
     var configuration = {
       baseUrl: baseUrl || '',
       suffix: suffix,
-      staticFiles: staticFiles,
-      staticValues: staticValues
+      langsFiles: langsFiles,
+      langsValues: langsValues,
+      fallbackLanguage: fallbackLanguage
     };
+
+    /**
+     * @ngdoc method
+     * @param name
+     * @returns usedLanguage || false
+     * @private
+     */
+    function $$setUsedLanguage(name) {
+      return isString(name)
+        ? usedLanguage = name
+        : false;
+    }
 
     /**
      * @ngdoc method
@@ -202,7 +237,7 @@ function ngTranslationProvider() {
 
       var promises = [];
 
-      forEach(staticFiles, function(value, key) {
+      forEach(langsFiles, function(value, key) {
         promises.push(staticFilesLoader.get({
           baseUrl: configuration.baseUrl,
           suffix: suffix,
@@ -221,7 +256,7 @@ function ngTranslationProvider() {
      * @return {Array}
      */
     function $$bindValues() {
-      return forEach(staticValues || [], function(value) {
+      return forEach(langsValues || [], function(value) {
         var file = {};
         file[value] = $injector.get(value);
         extend(staticFilesContainer, file);
@@ -241,7 +276,8 @@ function ngTranslationProvider() {
       configuration: configuration,
       get: $$getFile,
       getAll: $$getFiles,
-      init: $$init
+      init: $$init,
+      use: $$setUsedLanguage
     }
 
   }];

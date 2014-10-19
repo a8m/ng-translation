@@ -5,21 +5,21 @@ describe('ngTranslationProvider', function() {
   var loaderResult;
 
   //Provider
-  function staticFiles(files) {
+  function langsFiles(files) {
     return function(ngTranslationProvider) {
-      ngTranslationProvider.staticFiles(files);
+      ngTranslationProvider.langsFiles(files);
     }
   }
 
-  function addStaticFile(file) {
+  function addLangFile(file) {
     return function(ngTranslationProvider) {
-      ngTranslationProvider.addStaticFile(file);
+      ngTranslationProvider.addLangFile(file);
     }
   }
 
-  function staticValues(values) {
+  function langsValues(values) {
     return function(ngTranslationProvider) {
-      ngTranslationProvider.staticValues(values);
+      ngTranslationProvider.langsValues(values);
     }
   }
 
@@ -66,30 +66,30 @@ describe('ngTranslationProvider', function() {
 
   describe('test setters', function() {
 
-    //staticFiles
+    //langsFiles
     it('should be able to set staticFiles', function() {
       var files = { login: '/login_page',  logout: '/logout_page' };
-      module(staticFiles(files));
+      module(langsFiles(files));
       inject(function(ngTranslation) {
-        expect(ngTranslation.configuration.staticFiles).toEqual(files);
+        expect(ngTranslation.configuration.langsFiles).toEqual(files);
       });
     });
 
-    //addStaticFile
-    it('should able to add static file', function() {
+    //addLangFile
+    it('should able to add lang file', function() {
       var file = { foo: '/foo' };
-      module(addStaticFile(file));
+      module(addLangFile(file));
       inject(function(ngTranslation) {
-        expect(ngTranslation.configuration.staticFiles).toEqual(file);
+        expect(ngTranslation.configuration.langsFiles).toEqual(file);
       });
     });
 
-    //staticValues
-    it('should be able to set staticValues', function() {
+    //langsValues
+    it('should be able to set langsValues', function() {
       var values = ['demo1', 'demo2', 'demo3'];
-      module(staticValues(values));
+      module(langsValues(values));
       inject(function(ngTranslation) {
-        expect(ngTranslation.configuration.staticValues).toEqual(values);
+        expect(ngTranslation.configuration.langsValues).toEqual(values);
       });
     });
 
@@ -131,7 +131,7 @@ describe('ngTranslationProvider', function() {
     beforeEach(function() {
       //module
       module(
-        staticFiles({ login: '/login', logout: 'logout' }),
+        langsFiles({ login: '/login', logout: 'logout' }),
         setFilesSuffix('.json'),
         setBaseUrl('/app/static')
       );
@@ -176,7 +176,7 @@ describe('ngTranslationProvider', function() {
   describe('external behavior', function() {
 
     it('should be friendly with files path', function() {
-      module(staticFiles({ homepage: 'homepage.json' }));
+      module(langsFiles({ homepage: 'homepage.json' }));
       inject(function(ngTranslation, staticFilesLoader) {
         var spy = spyOn(staticFilesLoader, 'get');
         ngTranslation.init();
@@ -193,7 +193,7 @@ describe('ngTranslationProvider', function() {
       beforeEach(module(function($provide) {
         $provide.value('value1', v1);
         $provide.value('value2', v2);
-      }, staticValues([ 'value1', 'value2' ]))
+      }, langsValues([ 'value1', 'value2' ]))
     );
 
     it('should all values as a files', inject(function(ngTranslation) {
