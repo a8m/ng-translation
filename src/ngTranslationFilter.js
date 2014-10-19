@@ -20,7 +20,7 @@ angular.module('ng-translation.filter', [ 'ng-translation.provider' ])
       var res = $parse(string)(ngTranslation[funcName](args[0]));
 
       //if there is no arguments
-      if(!args.length) {
+      if(!args.length || isUndefined(res)) {
         return res || string;
         //if the first argument is an object
       } else if(isObject(args[0])) {

@@ -83,6 +83,7 @@ function ngTranslationDirective($parse) {
     compile: function(tElm, tAttr, transclude) {
 
       var args = tAttr[this.name]
+        .replace(/\s/g, '')
         .match(/^([^(]+?)\s*(\((.*)\))?$/);
 
       //set the file name if exist

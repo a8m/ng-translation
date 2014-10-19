@@ -1,12 +1,14 @@
-angular.module('app', ['ng.static'])
-  .controller('MainController', function($scope) {
-    $scope.foo = 'bar';
-    $scope.role = 'manager';
+angular.module('app', ['ng-translation'])
+  .controller('MainController', function($scope, ngTranslation) {
 
-    $scope.changeRole = function(role) {
-      return (role === 'manager') ?
-        $scope.role = 'employee' :
-        $scope.role = 'manager';
+    $scope.languages = ['en', 'de', 'es'];
+    $scope.user = {
+      name: 'Default UserName',
+      password: '90_xsB@4{s'
+    };
+
+    $scope.update = function(language) {
+      ngTranslation.use(language);
     };
 
   })
@@ -14,16 +16,14 @@ angular.module('app', ['ng.static'])
     value1: { foo: 'bar' },
     value2: { foo: 'baz' }
   })
-  .config(['ngStaticProvider', function(ngStaticProvider) {
-    ngStaticProvider
-      .setDirectory('/ng-static/demo/static')
-      .staticFiles({
-        demo:  'demo.json',
-        demo1: 'demo.json',
-        demo2: 'demo.json'
+  .config(['ngTranslationProvider', function(ngTranslationProvider) {
+    ngTranslationProvider
+      .setDirectory('/ng-translation/demo/languages')
+      .setFilesSuffix('.json')
+      .langsFiles({
+        en: 'en',
+        de: 'de',
+        es: 'es'
       })
-      .staticValues([
-        'value1',
-        'value2'
-      ])
+      .fallbackLanguage('en')
   }]);

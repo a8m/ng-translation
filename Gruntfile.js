@@ -30,7 +30,7 @@ module.exports = function(grunt) {
       }
     },
     zip: {
-      '<%= dirs.dest %>/ng-static.zip': [
+      '<%= dirs.dest %>/ng-translation.zip': [
         '<%= dirs.dest %>/<%= pkg.name %>.js',
         '<%= dirs.dest %>/<%= pkg.name %>.min.js'
       ]

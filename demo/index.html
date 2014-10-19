@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-    <title>ng-static demo</title>
+    <title>ng-translation demo</title>
 </head>
 <body ng-controller="MainController">
 
-    <div>
-        {{ foo }}<br/>
-        {{ 'foo' | static: 'demo' }}
-    </div>
+    <select ng-change="update(language)" ng-model="language" ng-options="lang for lang in languages">
+        <option value="">-- language --</option>
+    </select>
 
-    <div>
-        <p> {{ 'message.'+role  | static: 'demo' }} </p>
-    </div>
-    <button ng-click="changeRole(role)">Change Role</button>
+    <h3>{{ 'title' | translate }}</h3>
+    <h4>{{ 'description.text'  | translate }}</h4>
+    <p>{{ 'button' | translate }}</p>
 
-    <div ng-repeat="slider in 'slides' | static: 'demo' track by $index">
-        {{ slider }}
-    </div>
-
-
-    <div>
-        <h2>default file:</h2>
-        {{ 'foo' | static }}
-    </div>
-
-    <div>
-        <p ng-static="demo(foo)"></p>
-    </div>
+    <table style="border:1px solid red">
+        <tr>
+            <td>User Details:</td>
+        </tr>
+        <tr>
+            <td>{{ 'message' | translate: this }}</td>
+        </tr>
+        <tr>
+            Change user details:
+        </tr>
+        <tr>
+            <td>name: <input ng-model="user.name" type="text"/> </td>
+        </tr>
+        <tr>
+            <td>password: <input ng-model="user.password" type="text"/> </td>
+        </tr>
+    </table>
 
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../src/common.js"></script>
-    <script src="../src/ngStatic.js"></script>
-    <script src="../src/ngStaticProvider.js"></script>
+    <script src="../src/ngTranslation.js"></script>
+    <script src="../src/ngTranslationProvider.js"></script>
     <script src="../src/staticFilesLoader.js"></script>
-    <script src="../src/ngStaticFilter.js"></script>
-    <script src="../src/ngStaticDirective.js"></script>
+    <script src="../src/ngTranslationFilter.js"></script>
+    <script src="../src/ngTranslationDirective.js"></script>
     <script src="demo.js"></script>
 </body>
 </html>

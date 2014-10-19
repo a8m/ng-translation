@@ -1,0 +1,8 @@
+{
+  "title": "Wählen Sie eine Vorlage, um zu beginnen.",
+  "description": {
+    "text": "Hunderte vollständig anpassbarer HTML5-Templates in jeder Kategorie verfügbar. Wählen Sie eine Vorlage und erstellen Sie eine einzigartige Website."
+  },
+  "button": "Anmelden",
+  "message": "Hallo {{user.name}}, Uw wachtwoord is: {{user.password}}"
+}

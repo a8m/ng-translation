@@ -1,0 +1,8 @@
+{
+  "title": "Elige una Plantilla",
+  "description": {
+    "text": "Más de 500 plantillas HTML5 totalmente personalizables disponibles en diversas categorías. Escoge la tuya y crea algo único y original."
+  },
+  "button": "Entra / Regístrate",
+  "message": "Hola {{ user.name }}, su contraseña es: {{ user.password }}"
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Select a Template",
+  "description": {
+    "text": "100s of fully customizable HTML5 templates available in every category. Choose yours and create something totally original."
+  },
+  "button": "Sign In",
+  "message": "Hello {{ user.name }}, your password is: {{ user.password }}"
+}
