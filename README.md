@@ -57,7 +57,7 @@ angular.module('app', ['ng-translation'])
       ]);
   }]);
 ```
-##addLangFile
+###addLangFile
 Add a single language file.  
 ```js
 angular.module('app', ['ng-translation'])
@@ -68,7 +68,7 @@ angular.module('app', ['ng-translation'])
       });
   }]);
 ```
-##setFilesSuffix
+###setFilesSuffix
 Set global suffix to all files.  
 ```js
 angular.module('app', ['ng-translation'])
@@ -82,7 +82,7 @@ angular.module('app', ['ng-translation'])
       });
   }]);
 ```
-#fallbackLanguage
+###fallbackLanguage
 Set fallback language. 
 ```js
 angular.module('app', ['ng-translation'])
