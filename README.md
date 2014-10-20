@@ -159,7 +159,7 @@ Use specific language.(prefered language)
 angular.module('app', ['ng-translation'])
   .run(function($location, ngTranslation) {
     ngTranslation.use(
-      $location.search().lang
+      $location.search().lang //e.g: "de", "en"
     );
   });
 ```
