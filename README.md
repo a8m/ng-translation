@@ -122,3 +122,44 @@ angular.module('app', ['ng-translation'])
     };
   });
 ```
+###getAll
+Get all files(the staticFilesContainer)
+**Usage:** `ngTranslation.getAll()`
+**Returns:** files `{Object}`
+```js
+angular.module('app', ['ng-translation'])
+  .controller('MainCtrl', function(ngTranslation) {
+    $scope.getAll = function() {
+      return ngTranslation.getAll(); 
+      //{ en: Object, de: Object, es: Obje... }
+    };
+  });
+```
+###getUsed
+Get the current used file || fallback file
+**Usage:** `ngTranslation.getUsed()`
+**Returns:** file `{Object}`
+```js
+angular.module('app', ['ng-translation'])
+  .controller('MainCtrl', function(ngTranslation) {
+    $scope.getUsed = function() {
+      return ngTranslation.getUsed(); 
+       //{title: "Select a Template", message: "Hello {{ user.name... }
+    };
+  });
+```
+###init
+`@private` function.  
+
+###use
+Use specific language.(prefered language)  
+**Usage:** `ngTranslation.use({String})`  
+**Returns:** `{Boolean}`
+```js
+angular.module('app', ['ng-translation'])
+  .run(function($location, ngTranslation) {
+    ngTranslation.use(
+      $location.search().lang
+    );
+  });
+```
