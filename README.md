@@ -4,7 +4,7 @@
 ##Table of contents:
 - [Get Started](#get-started)
 - [Development](#development)
-- [Documentation](#documentation)
+- [ngTranslationProvider](#ngTranslationProvider)
   - [Configuration](#configuration)
     - [setBaseUrl](#setbaseurl)
     - [langsFiles](#langsfiles)
@@ -12,7 +12,13 @@
     - [addLangFile](#addlangfile)
     - [setFilesSuffix](#setfilessuffix)
     - [fallbackLanguage](#fallbacklanguage)
-
+  - [API](#api)
+    - [configuration](#configuration1)
+    - [get](#get)
+    - [getAll](#getall)
+    - [getUsed](#getused)
+    - [init](init)
+    - [use](#use)
 
 ##Configuration
 ngTranlation configuration options, **see below:**
@@ -90,4 +96,29 @@ angular.module('app', ['ng-translation'])
     ngTranslationProvider
       .fallbackLanguage('en');
   }]);
+```
+##API
+The returns API, **see below:**
+
+###configuration
+The expose configuration
+```js
+angular.module('app', ['ng-translation'])
+  .controller('MainCtrl', function(ngTranslation) {
+    console.log(ngTranslation.configuration);
+    //{ baseUrl: "/ng-translation/demo/languages", suffix: ".json", langsFiles: Obje... }
+  });
+```
+###get
+Get specific file by name.  
+**Usage:** `ngTranslation.get({String})`
+**Returns:** file `{Object}`
+```js
+angular.module('app', ['ng-translation'])
+  .controller('MainCtrl', function(ngTranslation) {
+    $scope.getByName = function(name) {
+      return ngTranslation.get(name); 
+      //{title: "Select a Template", message: "Hello {{ user.name... }
+    };
+  });
 ```
