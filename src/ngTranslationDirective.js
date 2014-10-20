@@ -23,7 +23,7 @@ function ngTranslationDirective($parse) {
 
       //set the file name if exist
       var params = /[)]$/.test(tAttr[this.name])
-        ? { file: ': ' + args[1], key: args[3] }
+        ? { file: ': \'' + args[1] + '\'', key: args[3] }
         : { file: '', key: args[1] };
 
       tElm.text('{{ ' + params.key + ' | translate' + params.file +' }}');

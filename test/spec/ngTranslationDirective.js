@@ -25,7 +25,7 @@ describe('ngTranslationDirective', function() {
 
   it('should compile to filter format: {{ key | translate: file }}', function() {
     inject(compile('<p ng-translate="file(key)"></p>'));
-    expectEqual('{{ key | translate: file }}');
+    expectEqual('{{ key | translate: \'file\' }}');
     expectNotEqual('{{ file | translate: key }}');
   });
 
@@ -35,9 +35,15 @@ describe('ngTranslationDirective', function() {
     expectNotEqual('{{ key }}');
   });
 
+  it('should compile to filter format: {{ \'key\' | translate }}', function() {
+    inject(compile('<p ng-translate="\'key\'"></p>'));
+    expectEqual('{{ \'key\' | translate }}');
+    expectNotEqual('{{ key | translate }}');
+  });
+
   it('should support nested keys', function() {
     inject(compile('<p ng-translate="demoFile(key.nested.key)"></p>'));
-    expectEqual('{{ key.nested.key | translate: demoFile }}');
+    expectEqual('{{ key.nested.key | translate: \'demoFile\' }}');
     expectNotEqual('{{ key.nested.key }}');
   });
 
