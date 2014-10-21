@@ -4,7 +4,7 @@
 ##Table of contents:
 - [Get Started](#get-started)
 - [Development](#development)
-- [ngTranslationProvider](#ngTranslationProvider)
+- [ngTranslationProvider](#ngtranslationprovider)
   - [Configuration](#configuration)
     - [setBaseUrl](#setbaseurl)
     - [langsFiles](#langsfiles)
@@ -19,6 +19,8 @@
     - [getUsed](#getused)
     - [init](init)
     - [use](#use)
+- [ngTranslationFilter](ngtranslationfilter)
+- [ngTranslationDirective](ngtranslationdirective)
 
 ##Configuration
 ngTranlation configuration options, **see below:**
@@ -163,3 +165,48 @@ angular.module('app', ['ng-translation'])
     );
   });
 ```
+##ngTranslationFilter
+There's a 4 ways to use the `translate` filter.  
+* simple - pass a key, and get the value from the **usedFile**(prefered language, `.use`).
+```html
+<p>{{ 'message' | translate }}</p>
+<p>{{ 'message.nested' | translate }}</p>
+<!-- note: 'key' is a property on the scope -->
+<p>{{ key | translate }}</p>
+```
+* from specific file - pass a key, and fileName(language), and get the value from `this` file.
+```html
+<p>{{ 'message' | translate: 'en' }}<p>
+<p>{{ 'message.nested' | translate: 'de' }}<p>
+<!-- note: 'key' and `lang` are a properties on the scope -->
+<p>{{ key | translate: lang }}<p>
+```
+* interpolate - there's a situation, that you want to store an angular expression as a value.  
+**e.g**: `'this is string that {{ foo }}, {{ bar.baz }} need to interpolate.'`  
+**Usage:** `{{ key | translate: object }}`  
+```js
+$scope.user = { name: 'Ariel M.` }
+$scope.property = 'value';
+```
+```html
+<!-- note: user is a property on the scope, so if the real value on the file is:
+`hello {{ name }}, wanna login?`
+the result will be: `hello Ariel M., wanna login ?` -->
+<p>{{ 'user.message' | translate: user }}</p>
+<!-- note: if you want to use directly properties on $scope, use the `this` keyword,
+(every $scope, have the own `this` property that point to him self) -->
+<p>{{ 'message' | translate: this }}</p>
+```
+* interpolate from other file - if you want the same interpolation behavior, but get the value 
+from specific file.  
+**Usage:** `{{ key | translate: lang: object }}`  
+```html
+<p>{{ 'user.message' | translate: 'de': user }}</p>
+<!-- note: 'key' and `lang` are a properties on the scope -->
+<p>{{ key | translate: lang: this }}</p>
+```
+##ngTranslationDirective
+
+
+
+
