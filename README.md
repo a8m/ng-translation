@@ -22,6 +22,40 @@
 - [ngTranslationFilter](#ngtranslationfilter)
 - [ngTranslationDirective](#ngtranslationdirective)
 
+##Get Started
+**(1)** You can install ng-translation using 3 different ways:  
+  - clone & [build](#developing) this repository
+  - **[Bower](http://bower.io/)**: by running `$ bower install ng-translation` from your terminal
+  - via **[npm](https://www.npmjs.org/)**: by running `$ npm install ng-translation` from your terminal  
+
+**(2)** Include `ng-translation.js` (or `ng-translation.min.js`) in your `index.html`, after including Angular itself.    
+
+**(3)** Add `'ng-translation'` to your main module's list of dependencies.    
+
+When you're done, your setup should look similar to the following:
+
+```html
+<!doctype html>
+<html ng-app="myApp">
+<head>
+   
+</head>
+<body>
+    ...
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+    <script src="bower_components/js/angular-filter.min.js"></script>
+    ...
+    <script>
+        angular.module('myApp', ['ng-translation'])
+          .controller('MainCtrl', function($scope) {
+            //...
+          });
+    </script>
+    ...
+</body>
+</html>
+```
+
 ##Configuration
 ngTranlation configuration options, **see below:**
 
