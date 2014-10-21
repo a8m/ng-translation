@@ -3,7 +3,7 @@
 
 ##Table of contents:
 - [Get Started](#get-started)
-- [Example](#examples)
+- [Example](#example)
 - [Development](#development)
 - [ngTranslationProvider](#ngtranslationprovider)
   - [Configuration](#configuration)
