@@ -13,6 +13,16 @@ module.exports = function(config) {
     // base path, that will be used to resolve files and exclude
     basePath: '../',
 
+    // list of files / patterns to load in the browser
+    files: [
+      'bower_components/angular/angular.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      'src/**/*.js',
+      'src/**/**/*.js',
+      'test/spec/**/*.js',
+      'test/spec/**/**/*.js'
+    ],
+
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['jasmine'],
 
@@ -27,21 +37,15 @@ module.exports = function(config) {
       dir: "test/coverage/"
     },
 
-    // list of files / patterns to load in the browser
-    files: [
-      'bower_components/angular/angular.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'src/**/*.js',
-      'src/**/**/*.js',
-      'test/spec/**/*.js',
-      'test/spec/**/**/*.js'
-    ],
-
     // list of files / patterns to exclude
     exclude: [],
 
     // web server port
     port: 8080,
+
+    // cli runner port
+    runnerPort: 9100,
+
 
     // Start these browsers, currently available:
     // - Chrome
@@ -61,6 +65,9 @@ module.exports = function(config) {
       'karma-jasmine',
       'karma-coverage'
     ],
+
+    // If browser does not capture in given timeout [ms], kill it
+    captureTimeout: 60000,
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
