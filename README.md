@@ -19,8 +19,8 @@
     - [getUsed](#getused)
     - [init](init)
     - [use](#use)
-- [ngTranslationFilter](ngtranslationfilter)
-- [ngTranslationDirective](ngtranslationdirective)
+- [ngTranslationFilter](#ngtranslationfilter)
+- [ngTranslationDirective](#ngtranslationdirective)
 
 ##Configuration
 ngTranlation configuration options, **see below:**
