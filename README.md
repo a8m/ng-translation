@@ -206,7 +206,19 @@ from specific file.
 <p>{{ key | translate: lang: this }}</p>
 ```
 ##ngTranslationDirective
-
-
+There's a 2 ways to use the `ngTranslate` directive.
+* get the value from the **usedFile**(prefered language, `.use`).
+```html
+<p ng-translate="'message'"></p>
+<!-- note: 'key' is a property on the scope -->
+<p ng-translate="key"></p>
+```
+* get the value from specific file(specific language).
+```html
+<!-- note: `en` interpolate as a string -->
+<p ng-translate="en('message')"></p>
+<!-- note: 'key' is a property on the scope -->
+<p ng-translate="de(key)"></p>
+```
 
 
