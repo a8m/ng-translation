@@ -185,7 +185,7 @@ There's a 4 ways to use the `translate` filter.
 **e.g**: `'this is string that {{ foo }}, {{ bar.baz }} need to interpolate.'`  
 **Usage:** `{{ key | translate: object }}`  
 ```js
-$scope.user = { name: 'Ariel M.` }
+$scope.user = { name: 'Ariel M.' }
 $scope.property = 'value';
 ```
 ```html
