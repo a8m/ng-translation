@@ -10,7 +10,6 @@ angular.module('app', ['ng-translation'])
     $scope.update = function(language) {
       ngTranslation.use(language);
     };
-
   })
   .value({
     value1: { foo: 'bar' },
@@ -26,4 +25,9 @@ angular.module('app', ['ng-translation'])
         es: 'es'
       })
       .fallbackLanguage('en')
-  }]);
+  }])
+  .run(function($location, ngTranslation) {
+    ngTranslation.use(
+      $location.search().lang
+    );
+  });
