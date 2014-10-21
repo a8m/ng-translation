@@ -3,7 +3,7 @@
 
 ##Table of contents:
 - [Get Started](#get-started)
-- [Examples](#examples)
+- [Example](#examples)
 - [Development](#development)
 - [ngTranslationProvider](#ngtranslationprovider)
   - [Configuration](#configuration)
@@ -128,7 +128,8 @@ angular.module('app', ['ng-translation'])
         </tr>
     </table>
 ```
-**To learn more, Read the documentation... **
+
+**To learn more, Read the documentation...**
 
 ##Configuration
 ngTranlation configuration options, **see below:**
