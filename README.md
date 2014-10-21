@@ -3,6 +3,7 @@
 
 ##Table of contents:
 - [Get Started](#get-started)
+- [Examples](#examples)
 - [Development](#development)
 - [ngTranslationProvider](#ngtranslationprovider)
   - [Configuration](#configuration)
@@ -55,6 +56,79 @@ When you're done, your setup should look similar to the following:
 </body>
 </html>
 ```
+##Example
+**Quick example:**  
+**JS:**  
+```js
+/**
+ * Directory structure
+ * __ __ __ __ __ __
+ * | - dist          |
+ * |   - assets      |
+ * |     - static    |
+ * |__ __ __ __ __ __|
+ */
+//AngularJS app
+angular.module('app', ['ng-translation'])
+  .config(['ngTranslationProvider', function(ngTranslationProvider) {
+    ngTranslationProvider
+      .setDirectory('/dist/assets/static')
+      .setFilesSuffix('.json')
+      .langsFiles({
+        en: 'en',
+        de: 'de',
+        es: 'es'
+      })
+      .fallbackLanguage('en')
+  }])
+  .run(['ngTranslation', '$location'], function(ngTranslation, $location) {
+    ngTranslation.use(
+        $location.search().lang
+      );
+  });
+```
+**JSON:** (one file for example)    
+```json
+{
+  "title": "Wählen Sie eine Vorlage, um zu beginnen.",
+  "description": {
+    "text": "Hunderte vollständig anpassbarer HTML5-Templates in jeder Kategorie verfügbar."
+  },
+  "button": "Anmelden",
+  "message": "Hallo {{user.name}}, Uw wachtwoord is: {{user.password}}"
+}
+```
+**HTML:**
+```html
+    <!-- simple usage example -->
+    <h3>{{ 'title' | translate }}</h3>
+    <h4>{{ 'description.text'  | translate }}</h4>
+    <p>{{ 'button' | translate }}</p>
+
+    <!-- directive example -->
+    <p ng-translate="'message'"></p>
+    <p ng-translate="es('message')"></p>
+
+    <!-- bind to model example -->
+    <table style="border:1px solid red">
+        <tr>
+            <td>User Details:</td>
+        </tr>
+        <tr>
+            <td>{{ 'message' | translate: this }}</td>
+        </tr>
+        <tr>
+            Change user details:
+        </tr>
+        <tr>
+            <td>name: <input ng-model="user.name" type="text"/> </td>
+        </tr>
+        <tr>
+            <td>password: <input ng-model="user.password" type="text"/> </td>
+        </tr>
+    </table>
+```
+**To learn more, Read the documentation... **
 
 ##Configuration
 ngTranlation configuration options, **see below:**
