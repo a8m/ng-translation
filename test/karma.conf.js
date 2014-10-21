@@ -19,7 +19,7 @@ module.exports = function(config) {
       'bower_components/angular-mocks/angular-mocks.js',
       'src/**/*.js',
       'src/**/**/*.js',
-      'test/spec/**/*.js'
+      'test/spec/*.js'
     ],
 
     // testing framework to use (jasmine/mocha/qunit/...)
