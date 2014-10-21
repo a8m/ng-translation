@@ -187,7 +187,7 @@ describe('ngTranslationProvider', function() {
     }));
 
     it('should return the used language if exist', inject(function(ngTranslation) {
-      expect(ngTranslation.getUsed()).oEqual()
+      expect(ngTranslation.getUsed()).toEqual(mockResult.de);
       ngTranslation.use('en');
       expect(ngTranslation.getUsed()).toEqual(mockResult.en)
     }));
