@@ -1,5 +1,5 @@
 #ngTranslation [![Coverage Status](https://img.shields.io/coveralls/a8m/ng-translation.svg)](https://coveralls.io/r/a8m/ng-translation)
-> Fast, Easy and Dynamic translation for AngularJS **v0.0.3**
+> Fast, Easy and Dynamic translation for AngularJS. **v0.0.3**
 
 ##Table of contents:
 - [Get Started](#get-started)
