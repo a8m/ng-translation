@@ -1,6 +1,6 @@
 /**
  * Fast, Easy and Dynamic translation for AngularJS
- * @version v0.0.3 - 2014-10-20 * @link https://github.com/a8m/ng-translation
+ * @version v0.0.3 - 2014-10-22 * @link https://github.com/a8m/ng-translation
  * @author Ariel Mashraki <ariel@mashraki.co.il>
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
@@ -8,17 +8,11 @@
 /*jshint globalstrict:true*/
 'use strict';
 
-var isDefined = angular.isDefined,
-  isUndefined = angular.isUndefined,
-  isFunction = angular.isFunction,
+var isUndefined = angular.isUndefined,
   isString = angular.isString,
-  isNumber = angular.isNumber,
   isObject = angular.isObject,
-  isArray = angular.isArray,
   forEach = angular.forEach,
-  extend = angular.extend,
-  copy = angular.copy,
-  equals = angular.equals;
+  extend = angular.extend;
 
 /**
  * @description
@@ -88,7 +82,7 @@ function ngTranslationDirective($parse) {
 
       //set the file name if exist
       var params = /[)]$/.test(tAttr[this.name])
-        ? { file: ': ' + args[1], key: args[3] }
+        ? { file: ': \'' + args[1] + '\'', key: args[3] }
         : { file: '', key: args[1] };
 
       tElm.text('{{ ' + params.key + ' | translate' + params.file +' }}');
@@ -115,25 +109,29 @@ function ngTranslationDirective($parse) {
 angular.module('ng-translation.filter', [ 'ng-translation.provider' ])
   .filter('translate', ['$parse', '$interpolate', 'ngTranslation', function($parse, $interpolate, ngTranslation) {
 
-    return function(string) {
+    var translateFilter = function(string) {
 
       var args = Array.prototype.slice.call(arguments, 1);
       var funcName = isString(args[0]) ? 'get' : 'getUsed';
       var res = $parse(string)(ngTranslation[funcName](args[0]));
 
       //if there is no arguments
-      if(!args.length) {
+      if(!args.length || isUndefined(res)) {
         return res || string;
         //if the first argument is an object
       } else if(isObject(args[0])) {
-        return $interpolate(res)(args[0])
+        return $interpolate(res)(args[0] || {})
       }
       //the first arguments is a string
       //check if it should be interpolate
       return isObject(args[1])
-        ? $interpolate(res)(args[1])
+        ? $interpolate(res)(args[1] || {})
         : res
-    }
+    };
+
+    translateFilter.$stateful = true;
+
+    return translateFilter;
 
   }]);
 
