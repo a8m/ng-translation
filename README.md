@@ -44,7 +44,7 @@ When you're done, your setup should look similar to the following:
 <body>
     ...
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
-    <script src="bower_components/js/angular-filter.min.js"></script>
+    <script src="bower_components/js/ng-translation.min.js"></script>
     ...
     <script>
         angular.module('myApp', ['ng-translation'])
