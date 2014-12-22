@@ -1,4 +1,8 @@
-#ngTranslation [![Coverage Status](https://img.shields.io/coveralls/a8m/ng-translation.svg)](https://coveralls.io/r/a8m/ng-translation)
+#ngTranslation  
+[![NPM version][npm-image]][npm-url]
+[![Test coverage][coveralls-image]][coveralls-url]
+[![Dependency Status][david-image]][david-url]
+[![License][license-image]][license-url]
 > Fast, Easy and Dynamic translation for AngularJS. **v0.0.3**
 
 ##Table of contents:
@@ -329,5 +333,15 @@ There's a 2 ways to use the `ngTranslate` directive.
 <!-- note: 'key' is a property on the scope -->
 <p ng-translate="de(key)"></p>
 ```
+
+
+[npm-image]: https://img.shields.io/npm/v/ng-translation.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/ng-translation
+[coveralls-image]: https://img.shields.io/coveralls/a8m/ng-translation.svg?style=flat-square
+[coveralls-url]: https://coveralls.io/r/a8m/ng-translation
+[david-image]: http://img.shields.io/david/a8m/ng-translation.svg?style=flat-square
+[david-url]: https://david-dm.org/a8m/ng-translation
+[license-image]: http://img.shields.io/npm/l/ng-translation.svg?style=flat-square
+[license-url]: LICENSE
 
 
