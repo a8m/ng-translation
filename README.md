@@ -247,8 +247,8 @@ angular.module('app', ['ng-translation'])
   });
 ```
 ###getUsed
-Get the current used file || fallback file
-**Usage:** `ngTranslation.getUsed()`
+Get the current used file || fallback file  
+**Usage:** `ngTranslation.getUsed()`  
 **Returns:** file `{Object}`
 ```js
 angular.module('app', ['ng-translation'])
